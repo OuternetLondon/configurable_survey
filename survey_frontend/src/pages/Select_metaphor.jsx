@@ -14,10 +14,12 @@ import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
 import { use } from "react";
 import { Radio, RadioGroup } from "@/components/ui/radio";
+import "../index.css";
+import { useState } from "react";
+//import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
 
 function Select_metaphor() {
-  let size = "x";
-  let size2 = "l";
+  const [selectedValue, setSelectedValue] = useState("");
   const JSON = {
     default_colors: [
       { color: "gray", hex: "#52525b" },
@@ -43,79 +45,207 @@ function Select_metaphor() {
   // darken 0.5, 1.5, 2.5, 3.5  ends 4.5
   let dynamic_stack = "<HStack>";
 
-  function testSubmit() {
-    console.log("Button clicked");
+  function testSubmit(button) {
+    setSelectedValue(button);
+    console.log("selectedValue", selectedValue);
   }
   return (
     <>
-      <Flex w="100vw" h="100vh" justifyContent="center" alignItems="center">
+      <Flex
+        w="100vw"
+        h="100vh"
+        direction="column"
+        justifyContent="space-evenly"
+        alignItems="center"
+        //bg="var(--skoda_dark-500)"
+        bgImage="url(/images/O_bty190_BG_REF_12x6_v3.1001.jpeg)"
+        backgroundPosition="center"
+        bgSize="cover"
+      >
         <Box
           position="absolute"
           top="0"
           left="0"
           w="full"
-          color="var(--skoda_light-500)"
-          bg={{
-            base: "var(--skoda_dark-500)",
-          }}
+          color="var(--skoda_light-400)"
           p={4}
         >
-          Fixed Navbar
+          SKODA LOGO
         </Box>
-        <Text>What is the link between a </Text>
-        <Stack w="" h="">
+        <Text visibility="hidden" textStyle="5xl">
+          Text
+        </Text>
+        <Stack w="35%" gap="10px" h="">
           <Button
             colorScheme="teal"
-            borderColor="blue.500"
+            borderColor="white"
             borderStyle="solid"
-            px={100}
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+            onClick={() => testSubmit("driving_one")}
           >
-            <Text>Button</Text>
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              DRIVING FOOTAGE 1
+            </Text>
           </Button>
           <Button
-            onClick={() => {
-              testSubmit();
-            }}
             colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+            onClick={() => testSubmit("driving_two")}
           >
-            <Text>Button</Text>
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              DRIVING FOOTAGE 2
+            </Text>
           </Button>
-          <Button colorScheme="teal">
-            {" "}
-            <Text>Button</Text>
+          <Button
+            colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              CHIPMUNK
+            </Text>
           </Button>
-          <Button colorScheme="teal">
-            {" "}
-            <Text>Button</Text>
+          <Button
+            colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              RACOON
+            </Text>
+          </Button>
+          <Button
+            colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              CLOUDS
+            </Text>
+          </Button>
+          <Button
+            colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              SNOW DROP
+            </Text>
+          </Button>
+          <Button
+            colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="3xl"
+            >
+              HUMMING BIRD
+            </Text>
           </Button>
         </Stack>
+        {selectedValue ? (
+          <Button
+            borderColor="white"
+            borderStyle="solid"
+            width="15%"
+            py={30}
+            borderRadius="full"
+            //borderWidth="3px"
+            bg="var(--skoda_light-500)"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="2xl"
+              color="black"
+            >
+              Confirm
+            </Text>
+          </Button>
+        ) : (
+          <Button
+            colorScheme="teal"
+            borderColor="white"
+            borderStyle="solid"
+            width=""
+            py={30}
+            borderRadius="full"
+            borderWidth="3px"
+            bg="var(--skoda_dark-500)"
+            visibility="hidden"
+          >
+            <Text
+              //  fontWeight="bold"
+              fontFamily="skoda_regular, sans-serif"
+              textStyle="3xl"
+            >
+              SNOW DROP
+            </Text>
+          </Button>
+        )}
       </Flex>
-
-      <Stack>
-        <Button
-          size={`${size}${size2}`}
-          colorPalette="pink"
-          boxShadow="xl"
-          bg={{
-            base: "var(--new_color-400)",
-            _hover: "var(--red-600)",
-            borderRadius: "md",
-          }}
-        >
-          Click me
-        </Button>
-        <Button
-          size={`${size}${size2}`}
-          colorPalette="blue"
-          bg={{
-            base: "var(--blue-500)",
-            _hover: "var(--blue-600)",
-            borderRadius: "md",
-          }}
-        >
-          Click me
-        </Button>
-      </Stack>
     </>
   );
 }

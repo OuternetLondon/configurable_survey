@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "skoda_bold";
+  src: url("/fonts/SKODANext-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_regular";
+  src: url("/fonts/SKODANext-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "skoda_regular", sans-serif;
+}
