@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
-import { use } from "react";
+import { Children, use } from "react";
 import { Radio, RadioGroup } from "@/components/ui/radio";
 import "../index.css";
 import { useState } from "react";
@@ -32,18 +32,29 @@ function Select_metaphor() {
       { color: "purple", hex: "#a855f7" },
       { color: "pink", hex: "#ec4899" },
       { color: "cyan", hex: "#06b6d4" },
-      { color: "skoda_light", hex: "#98FB98" },
-      { color: "skoda_dark", hex: "#0E3A2B" },
+      { color: "skoda-light", hex: "#98FB98" },
+      { color: "skoda-dark", hex: "#0E3A2B" },
+    ],
+    components: [
+      {
+        name: "logo",
+        innerContent: "SKODA LOGO",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        color: "skoda-light-400",
+        padding: "4",
+      },
+      {
+        name: "flex_container",
+        direction: "vertical",
+        contentStructure: "space-evenly",
+        itemsCentered: true,
+        children: [],
+      },
     ],
   };
   useSetDefaultStyles(JSON);
-  /*let chroma_color = `#3b82f6`;
-  chroma_color = chroma(chroma_color).darken(4.5).hex();
-  document.documentElement.style.setProperty(`--blue-500`, `${chroma_color}`);
-  document.documentElement.style.setProperty(`--blue-600`, `#000000`);*/
-  // 0.5 then 1, then 2, then 2.5, then 3
-  // darken 0.5, 1.5, 2.5, 3.5  ends 4.5
-  let dynamic_stack = "<HStack>";
 
   function testSubmit(button) {
     setSelectedValue(button);
@@ -51,6 +62,16 @@ function Select_metaphor() {
   }
   return (
     <>
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        w="full"
+        color="var(--skoda-light-400)"
+        p={4}
+      >
+        SKODA LOGO
+      </Box>
       <Flex
         w="100vw"
         h="100vh"
@@ -62,16 +83,6 @@ function Select_metaphor() {
         backgroundPosition="center"
         bgSize="cover"
       >
-        <Box
-          position="absolute"
-          top="0"
-          left="0"
-          w="full"
-          color="var(--skoda_light-400)"
-          p={4}
-        >
-          SKODA LOGO
-        </Box>
         <Text visibility="hidden" textStyle="5xl">
           Text
         </Text>
@@ -84,7 +95,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
             onClick={() => testSubmit("driving_one")}
           >
             <Text
@@ -103,7 +114,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
             onClick={() => testSubmit("driving_two")}
           >
             <Text
@@ -122,7 +133,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
           >
             <Text
               //  fontWeight="bold"
@@ -140,7 +151,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
           >
             <Text
               //  fontWeight="bold"
@@ -158,7 +169,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
           >
             <Text
               //  fontWeight="bold"
@@ -176,7 +187,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
           >
             <Text
               //  fontWeight="bold"
@@ -194,7 +205,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
           >
             <Text
               //  fontWeight="bold"
@@ -213,7 +224,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             //borderWidth="3px"
-            bg="var(--skoda_light-500)"
+            bg="var(--skoda-light-500)"
           >
             <Text
               //  fontWeight="bold"
@@ -233,7 +244,7 @@ function Select_metaphor() {
             py={30}
             borderRadius="full"
             borderWidth="3px"
-            bg="var(--skoda_dark-500)"
+            bg="var(--skoda-dark-500)"
             visibility="hidden"
           >
             <Text
