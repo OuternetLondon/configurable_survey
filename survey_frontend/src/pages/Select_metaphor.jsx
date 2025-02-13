@@ -16,10 +16,13 @@ import { Children, use } from "react";
 import { Radio, RadioGroup } from "@/components/ui/radio";
 import "../index.css";
 import { useState } from "react";
+import Loop_components from "@/survey_components/loop_components";
 //import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
 
 function Select_metaphor() {
   const [selectedValue, setSelectedValue] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState("CHIPMUNK");
+
   const JSON = {
     default_colors: [
       { color: "gray", hex: "#52525b" },
@@ -35,31 +38,56 @@ function Select_metaphor() {
       { color: "skoda-light", hex: "#98FB98" },
       { color: "skoda-dark", hex: "#0E3A2B" },
     ],
-    components: [
-      {
-        name: "logo",
-        innerContent: "SKODA LOGO",
-        position: "absolute",
-        top: "0",
-        left: "0",
-        color: "skoda-light-400",
-        padding: "4",
-      },
-      {
-        name: "flex_container",
-        direction: "vertical",
-        contentStructure: "space-evenly",
-        itemsCentered: true,
-        children: [],
-      },
-    ],
   };
   useSetDefaultStyles(JSON);
-
   function testSubmit(button) {
     setSelectedValue(button);
     console.log("selectedValue", selectedValue);
   }
+
+  const questionList = {
+    questionOne: {
+      question: "null",
+      answers: [
+        "DRIVING FOOTAGE 1",
+        "DRIVING FOOTAGE 2",
+        "CHIPMUNK",
+        "RACOON",
+        "CLOUDS",
+        "SNOW DROP",
+        "HUMMINGBIRD",
+      ],
+    },
+    CHIPMUNK: {
+      question: "Chipmunk question",
+      answers: ["Chipmunk answer 1", "Chipmunk answer 2", "Chipmunk answer 3"],
+    },
+    RACOON: {
+      question: "Racoon question",
+      answers: ["Racoon answer 1", "Racoon answer 2", "Racoon answer 3"],
+    },
+    CLOUDS: {
+      question: "Clouds question",
+      answers: ["Clouds answer 1", "Clouds answer 2", "Clouds answer 3"],
+    },
+    SNOWDROP: {
+      question: "Snow Drop question",
+      answers: [
+        "Snow Drop answer 1",
+        "Snow Drop answer 2",
+        "Snow Drop answer 3",
+      ],
+    },
+    HUMMINGBIRD: {
+      question: "Hummingbird question",
+      answers: [
+        "Hummingbird answer 1",
+        "Hummingbird answer 2",
+        "Hummingbird answer 3",
+      ],
+    },
+  };
+
   return (
     <>
       <Box
@@ -83,143 +111,54 @@ function Select_metaphor() {
         backgroundPosition="center"
         bgSize="cover"
       >
-        <Text visibility="hidden" textStyle="5xl">
-          Text
+        <Text
+          visibility={currentQuestion === "questionOne" && "hidden"}
+          color="white"
+          fontFamily="skoda_bold, sans-serif"
+          textStyle="5xl"
+        >
+          {questionList[currentQuestion].question}
         </Text>
         <Stack w="35%" gap="10px" h="">
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-            onClick={() => testSubmit("driving_one")}
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              DRIVING FOOTAGE 1
-            </Text>
-          </Button>
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-            onClick={() => testSubmit("driving_two")}
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              DRIVING FOOTAGE 2
-            </Text>
-          </Button>
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              CHIPMUNK
-            </Text>
-          </Button>
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              RACOON
-            </Text>
-          </Button>
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              CLOUDS
-            </Text>
-          </Button>
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              SNOW DROP
-            </Text>
-          </Button>
-          <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
-            py={30}
-            borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
-          >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="3xl"
-            >
-              HUMMING BIRD
-            </Text>
-          </Button>
+          {questionList[currentQuestion].answers.map((answer) =>
+            selectedValue !== answer ? (
+              <Button
+                key={answer}
+                borderColor="white"
+                borderStyle="solid"
+                width=""
+                py={30}
+                borderRadius="full"
+                borderWidth="3px"
+                bg="var(--skoda-dark-500)"
+                onClick={() => testSubmit(answer)}
+              >
+                <Text fontFamily="skoda_bold, sans-serif" textStyle="3xl">
+                  {answer}
+                </Text>
+              </Button>
+            ) : (
+              <Button
+                key={answer}
+                borderColor="var(--skoda-light-500)"
+                borderStyle="solid"
+                color="black"
+                width=""
+                py={30}
+                borderRadius="full"
+                borderWidth="3px"
+                bg="var(--skoda-light-500)"
+                onClick={() => testSubmit(answer)}
+              >
+                <Text fontFamily="skoda_bold, sans-serif" textStyle="3xl">
+                  {answer}
+                </Text>
+              </Button>
+            )
+          )}
         </Stack>
         {selectedValue ? (
           <Button
-            borderColor="white"
-            borderStyle="solid"
             width="15%"
             py={30}
             borderRadius="full"
@@ -237,22 +176,20 @@ function Select_metaphor() {
           </Button>
         ) : (
           <Button
-            colorScheme="teal"
-            borderColor="white"
-            borderStyle="solid"
-            width=""
+            width="15%"
             py={30}
             borderRadius="full"
-            borderWidth="3px"
-            bg="var(--skoda-dark-500)"
+            //borderWidth="3px"
+            bg="var(--skoda-light-500)"
             visibility="hidden"
           >
             <Text
               //  fontWeight="bold"
-              fontFamily="skoda_regular, sans-serif"
-              textStyle="3xl"
+              fontFamily="skoda_bold, sans-serif"
+              textStyle="2xl"
+              color="black"
             >
-              SNOW DROP
+              Confirm
             </Text>
           </Button>
         )}
