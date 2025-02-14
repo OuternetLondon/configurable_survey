@@ -10,7 +10,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-
+import Loop_JSON from "@/survey_components/loop_JSON";
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
 import { Children, use } from "react";
@@ -25,7 +25,7 @@ function Select_metaphor() {
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
   const [finalAnswer, setFinalAnswer] = useState(false);
 
-  const JSON = {
+  const JSON_data = {
     default_colors: [
       { color: "gray", hex: "#52525b" },
       { color: "red", hex: "#ef4444" },
@@ -40,8 +40,85 @@ function Select_metaphor() {
       { color: "skoda-light", hex: "#98FB98" },
       { color: "skoda-dark", hex: "#0E3A2B" },
     ],
+    mainContainer: {
+      type: "survey",
+      format: "flex",
+      name: "main_container",
+      direction: "vertical",
+      height: "100vh",
+      width: "100vw",
+      contentStructure: "space-evenly",
+      itemsCentered: true,
+      image: "/images/background_skoda.jpg",
+    },
+    questionList: {
+      questionOne: {
+        question: "null",
+        answers: [
+          "DRIVING FOOTAGE 1",
+          "DRIVING FOOTAGE 2",
+          "CHIPMUNK",
+          "RACOON",
+          "CLOUDS",
+          "SNOW DROP",
+          "HUMMINGBIRD",
+        ],
+      },
+      CHIPMUNK: {
+        question: "Chipmunk question",
+        answers: [
+          "Chipmunk answer 1",
+          "Chipmunk answer 2",
+          "Chipmunk answer 3",
+        ],
+      },
+      RACOON: {
+        question: "What is the link between a Racoon and a Skoda Elqoq",
+        answers: ["Fur", "Storage", "Tail"],
+      },
+      CLOUDS: {
+        question: "Clouds question",
+        answers: ["Clouds answer 1", "Clouds answer 2", "Clouds answer 3"],
+      },
+      "SNOW DROP": {
+        question: "Snow Drop question",
+        answers: [
+          "Snow Drop answer 1",
+          "Snow Drop answer 2",
+          "Snow Drop answer 3",
+        ],
+      },
+      HUMMINGBIRD: {
+        question: "Hummingbird question",
+        answers: [
+          "Hummingbird answer 1",
+          "Hummingbird answer 2",
+          "Hummingbird answer 3",
+        ],
+      },
+      FINAL: {
+        question: "Look up!",
+        answers: [""],
+      },
+    },
   };
-  useSetDefaultStyles(JSON);
+  useSetDefaultStyles(JSON_data);
+
+  const sendData = async (selection) => {
+    console.log("senddata", currentQuestion, selectedValue);
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/survey_data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ selection }),
+      }
+    );
+    const result = await response.json();
+    console.log("result", result);
+  };
 
   function selectButton(button) {
     setSelectedValue(button);
@@ -59,11 +136,13 @@ function Select_metaphor() {
     ];
     let answers = ["DRIVING FOOTAGE 1", "DRIVING FOOTAGE 2"];
     if (follow_question.includes(currentQuestion)) {
+      sendData(currentQuestion);
       setCurrentQuestion("FINAL");
       setValueSelected(false);
       return;
     }
     if (answers.includes(selectedValue)) {
+      sendData(selectedValue);
       setCurrentQuestion("FINAL");
       setValueSelected(false);
       return;
@@ -79,53 +158,9 @@ function Select_metaphor() {
     setFinalAnswer(false);
   }
 
-  const questionList = {
-    questionOne: {
-      question: "null",
-      answers: [
-        "DRIVING FOOTAGE 1",
-        "DRIVING FOOTAGE 2",
-        "CHIPMUNK",
-        "RACOON",
-        "CLOUDS",
-        "SNOW DROP",
-        "HUMMINGBIRD",
-      ],
-    },
-    CHIPMUNK: {
-      question: "Chipmunk question",
-      answers: ["Chipmunk answer 1", "Chipmunk answer 2", "Chipmunk answer 3"],
-    },
-    RACOON: {
-      question: "What is the link between a Racoon and a Skoda Elqoq",
-      answers: ["Fur", "Storage", "Tail"],
-    },
-    CLOUDS: {
-      question: "Clouds question",
-      answers: ["Clouds answer 1", "Clouds answer 2", "Clouds answer 3"],
-    },
-    "SNOW DROP": {
-      question: "Snow Drop question",
-      answers: [
-        "Snow Drop answer 1",
-        "Snow Drop answer 2",
-        "Snow Drop answer 3",
-      ],
-    },
-    HUMMINGBIRD: {
-      question: "Hummingbird question",
-      answers: [
-        "Hummingbird answer 1",
-        "Hummingbird answer 2",
-        "Hummingbird answer 3",
-      ],
-    },
-    FINAL: {
-      question: "Look up!",
-      answers: [""],
-    },
-  };
-  console.log;
+  const questionList = JSON_data.questionList;
+  let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
+
   return (
     <>
       <Box
@@ -148,17 +183,7 @@ function Select_metaphor() {
       >
         Restart Symbol
       </Box>
-      <Flex
-        w="100vw"
-        h="100vh"
-        direction="column"
-        justifyContent="space-evenly"
-        alignItems="center"
-        //bg="var(--skoda_dark-500)"
-        bgImage="url(/images/background_skoda.jpg)"
-        backgroundPosition="center"
-        bgSize="cover"
-      >
+      <Flex {...flexStyles}>
         <Text
           visibility={currentQuestion === "questionOne" && "hidden"}
           color="white"
