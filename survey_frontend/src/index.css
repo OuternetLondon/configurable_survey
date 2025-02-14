@@ -15,3 +15,10 @@
 body {
   font-family: "skoda_regular", sans-serif;
 }
+
+.bg-image {
+  background-image: url(/images/O_bty190_BG_REF_12x6_v3.1001.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

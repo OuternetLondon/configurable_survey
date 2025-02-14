@@ -10,10 +10,10 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
+
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
 import { Children, use } from "react";
-import { Radio, RadioGroup } from "@/components/ui/radio";
 import "../index.css";
 import { useState } from "react";
 import Loop_components from "@/survey_components/loop_components";
@@ -21,7 +21,9 @@ import Loop_components from "@/survey_components/loop_components";
 
 function Select_metaphor() {
   const [selectedValue, setSelectedValue] = useState("");
-  const [currentQuestion, setCurrentQuestion] = useState("CHIPMUNK");
+  const [valueSelected, setValueSelected] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState("questionOne");
+  const [finalAnswer, setFinalAnswer] = useState(false);
 
   const JSON = {
     default_colors: [
@@ -40,9 +42,41 @@ function Select_metaphor() {
     ],
   };
   useSetDefaultStyles(JSON);
-  function testSubmit(button) {
+
+  function selectButton(button) {
     setSelectedValue(button);
+    setValueSelected(true);
     console.log("selectedValue", selectedValue);
+  }
+
+  function submitResponse() {
+    let follow_question = [
+      "CHIPMUNK",
+      "RACOON",
+      "CLOUDS",
+      "SNOW DROP",
+      "HUMMINGBIRD",
+    ];
+    let answers = ["DRIVING FOOTAGE 1", "DRIVING FOOTAGE 2"];
+    if (follow_question.includes(currentQuestion)) {
+      setCurrentQuestion("FINAL");
+      setValueSelected(false);
+      return;
+    }
+    if (answers.includes(selectedValue)) {
+      setCurrentQuestion("FINAL");
+      setValueSelected(false);
+      return;
+    }
+    setCurrentQuestion(selectedValue);
+    setValueSelected(false);
+  }
+
+  function restart() {
+    setCurrentQuestion("questionOne");
+    setSelectedValue("");
+    setValueSelected("");
+    setFinalAnswer(false);
   }
 
   const questionList = {
@@ -63,14 +97,14 @@ function Select_metaphor() {
       answers: ["Chipmunk answer 1", "Chipmunk answer 2", "Chipmunk answer 3"],
     },
     RACOON: {
-      question: "Racoon question",
-      answers: ["Racoon answer 1", "Racoon answer 2", "Racoon answer 3"],
+      question: "What is the link between a Racoon and a Skoda Elqoq",
+      answers: ["Fur", "Storage", "Tail"],
     },
     CLOUDS: {
       question: "Clouds question",
       answers: ["Clouds answer 1", "Clouds answer 2", "Clouds answer 3"],
     },
-    SNOWDROP: {
+    "SNOW DROP": {
       question: "Snow Drop question",
       answers: [
         "Snow Drop answer 1",
@@ -86,19 +120,33 @@ function Select_metaphor() {
         "Hummingbird answer 3",
       ],
     },
+    FINAL: {
+      question: "Look up!",
+      answers: [""],
+    },
   };
-
+  console.log;
   return (
     <>
       <Box
         position="absolute"
         top="0"
         left="0"
-        w="full"
+        s
         color="var(--skoda-light-400)"
         p={4}
       >
         SKODA LOGO
+      </Box>
+      <Box
+        position="absolute"
+        top="0"
+        right="0"
+        color="var(--skoda-light-400)"
+        p={4}
+        onClick={() => restart()}
+      >
+        Restart Symbol
       </Box>
       <Flex
         w="100vw"
@@ -107,7 +155,7 @@ function Select_metaphor() {
         justifyContent="space-evenly"
         alignItems="center"
         //bg="var(--skoda_dark-500)"
-        bgImage="url(/images/O_bty190_BG_REF_12x6_v3.1001.jpeg)"
+        bgImage="url(/images/background_skoda.jpg)"
         backgroundPosition="center"
         bgSize="cover"
       >
@@ -115,11 +163,17 @@ function Select_metaphor() {
           visibility={currentQuestion === "questionOne" && "hidden"}
           color="white"
           fontFamily="skoda_bold, sans-serif"
-          textStyle="5xl"
+          textStyle={currentQuestion === "FINAL" ? "7xl" : "5xl"}
         >
           {questionList[currentQuestion].question}
         </Text>
-        <Stack w="35%" gap="10px" h="">
+
+        <Stack
+          display={currentQuestion === "FINAL" ? "none" : "flex"}
+          w={currentQuestion === "questionOne" ? "35%" : "25%"}
+          gap="15px"
+          h=""
+        >
           {questionList[currentQuestion].answers.map((answer) =>
             selectedValue !== answer ? (
               <Button
@@ -131,7 +185,7 @@ function Select_metaphor() {
                 borderRadius="full"
                 borderWidth="3px"
                 bg="var(--skoda-dark-500)"
-                onClick={() => testSubmit(answer)}
+                onClick={() => selectButton(answer)}
               >
                 <Text fontFamily="skoda_bold, sans-serif" textStyle="3xl">
                   {answer}
@@ -148,7 +202,7 @@ function Select_metaphor() {
                 borderRadius="full"
                 borderWidth="3px"
                 bg="var(--skoda-light-500)"
-                onClick={() => testSubmit(answer)}
+                onClick={() => selectButton(answer)}
               >
                 <Text fontFamily="skoda_bold, sans-serif" textStyle="3xl">
                   {answer}
@@ -157,13 +211,16 @@ function Select_metaphor() {
             )
           )}
         </Stack>
-        {selectedValue ? (
+
+        {valueSelected ? (
           <Button
             width="15%"
             py={30}
             borderRadius="full"
             //borderWidth="3px"
             bg="var(--skoda-light-500)"
+            onClick={() => submitResponse()}
+            display={currentQuestion === "FINAL" && "none"}
           >
             <Text
               //  fontWeight="bold"
@@ -171,7 +228,7 @@ function Select_metaphor() {
               textStyle="2xl"
               color="black"
             >
-              Confirm
+              {currentQuestion === "questionOne" ? "Confirm" : "Reveal"}
             </Text>
           </Button>
         ) : (
@@ -182,6 +239,7 @@ function Select_metaphor() {
             //borderWidth="3px"
             bg="var(--skoda-light-500)"
             visibility="hidden"
+            display={currentQuestion === "FINAL" && "none"}
           >
             <Text
               //  fontWeight="bold"
