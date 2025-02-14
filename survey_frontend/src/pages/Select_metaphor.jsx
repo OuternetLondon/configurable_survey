@@ -51,6 +51,55 @@ function Select_metaphor() {
       itemsCentered: true,
       image: "/images/background_skoda.jpg",
     },
+    question: {
+      fontSize: "5xl",
+      color: "white",
+      fontStyle: "skoda_bold, sans-serif",
+    },
+    buttonGroup: {
+      // width: "35%",
+      gap: "15px",
+    },
+    secondButtonGroup: {
+      // width: "25%",
+      gap: "15px",
+    },
+    button: {
+      borderColor: "white",
+      borderStyle: "solid",
+      padding_y_axis: 30,
+      padding_x_axis: 20,
+      rounded: "true",
+      borderWidth: "3px",
+      backgroundColor: "skoda-dark-500",
+      selectedStyle: {
+        borderColor: "skoda-light-500",
+        borderStyle: "solid",
+        padding_y_axis: 30,
+        padding_x_axis: 20,
+        rounded: "true",
+        borderWidth: "3px",
+        backgroundColor: "skoda-light-500",
+        fontSize: "3xl",
+        color: "black",
+      },
+      text: {
+        fontSize: "3xl",
+        fontStyle: "skoda_bold, sans-serif",
+      },
+    },
+    confirmButton: {
+      borderColor: "white",
+      width: "15%",
+      padding_y_axis: 30,
+      rounded: "true",
+      backgroundColor: "skoda-light-500",
+      text: {
+        fontStyle: "skoda_bold, sans-serif",
+        fontSize: "2xl",
+        color: "black",
+      },
+    },
     questionList: {
       questionOne: {
         question: "null",
@@ -73,7 +122,7 @@ function Select_metaphor() {
         ],
       },
       RACOON: {
-        question: "What is the link between a Racoon and a Skoda Elqoq",
+        question: "What is the link between a Racoon and a Skoda Elroq?",
         answers: ["Fur", "Storage", "Tail"],
       },
       CLOUDS: {
@@ -160,14 +209,21 @@ function Select_metaphor() {
 
   const questionList = JSON_data.questionList;
   let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
-
+  let questionStyle = Loop_JSON({ JSON: JSON_data.question });
+  let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.buttonGroup });
+  let secondButtonGroupStyle = Loop_JSON({ JSON: JSON_data.secondButtonGroup });
+  let buttonStyle = Loop_JSON({ JSON: JSON_data.button });
+  let buttonClick = Loop_JSON({ JSON: JSON_data.button.selectedStyle });
+  let buttonTextStyle = Loop_JSON({ JSON: JSON_data.button.text });
+  let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
+  let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
+  console.log("questionStyle", questionStyle.fontSize);
   return (
     <>
       <Box
         position="absolute"
         top="0"
         left="0"
-        s
         color="var(--skoda-light-400)"
         p={4}
       >
@@ -186,52 +242,36 @@ function Select_metaphor() {
       <Flex {...flexStyles}>
         <Text
           visibility={currentQuestion === "questionOne" && "hidden"}
-          color="white"
-          fontFamily="skoda_bold, sans-serif"
-          textStyle={currentQuestion === "FINAL" ? "7xl" : "5xl"}
+          {...questionStyle}
+          fontSize={
+            currentQuestion === "FINAL" ? "95px" : JSON_data.question.fontSize
+          }
         >
           {questionList[currentQuestion].question}
         </Text>
 
         <Stack
           display={currentQuestion === "FINAL" ? "none" : "flex"}
-          w={currentQuestion === "questionOne" ? "35%" : "25%"}
-          gap="15px"
-          h=""
+          {...(currentQuestion === "questionOne"
+            ? buttonGroupStyle
+            : secondButtonGroupStyle)}
         >
           {questionList[currentQuestion].answers.map((answer) =>
             selectedValue !== answer ? (
               <Button
                 key={answer}
-                borderColor="white"
-                borderStyle="solid"
-                width=""
-                py={30}
-                borderRadius="full"
-                borderWidth="3px"
-                bg="var(--skoda-dark-500)"
+                {...buttonStyle}
                 onClick={() => selectButton(answer)}
               >
-                <Text fontFamily="skoda_bold, sans-serif" textStyle="3xl">
-                  {answer}
-                </Text>
+                <Text {...buttonTextStyle}>{answer}</Text>
               </Button>
             ) : (
               <Button
                 key={answer}
-                borderColor="var(--skoda-light-500)"
-                borderStyle="solid"
-                color="black"
-                width=""
-                py={30}
-                borderRadius="full"
-                borderWidth="3px"
-                bg="var(--skoda-light-500)"
+                {...buttonClick}
                 onClick={() => selectButton(answer)}
               >
-                <Text fontFamily="skoda_bold, sans-serif" textStyle="3xl">
-                  {answer}
-                </Text>
+                <Text {...buttonTextStyle}>{answer}</Text>
               </Button>
             )
           )}
@@ -239,41 +279,21 @@ function Select_metaphor() {
 
         {valueSelected ? (
           <Button
-            width="15%"
-            py={30}
-            borderRadius="full"
-            //borderWidth="3px"
-            bg="var(--skoda-light-500)"
+            {...confirmButtonStyle}
             onClick={() => submitResponse()}
             display={currentQuestion === "FINAL" && "none"}
           >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="2xl"
-              color="black"
-            >
+            <Text {...confirmText}>
               {currentQuestion === "questionOne" ? "Confirm" : "Reveal"}
             </Text>
           </Button>
         ) : (
           <Button
-            width="15%"
-            py={30}
-            borderRadius="full"
-            //borderWidth="3px"
-            bg="var(--skoda-light-500)"
+            {...confirmButtonStyle}
             visibility="hidden"
             display={currentQuestion === "FINAL" && "none"}
           >
-            <Text
-              //  fontWeight="bold"
-              fontFamily="skoda_bold, sans-serif"
-              textStyle="2xl"
-              color="black"
-            >
-              Confirm
-            </Text>
+            <Text {...confirmText}>Confirm</Text>
           </Button>
         )}
       </Flex>

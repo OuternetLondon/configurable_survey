@@ -12,6 +12,114 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "skoda_black";
+  src: url("/fonts/SKODANext-Black.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_black_italic";
+  src: url("/fonts/SKODANext-BlackItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "skoda_bold_italic";
+  src: url("/fonts/SKODANext-BoldItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "skoda_italic";
+  src: url("/fonts/SKODANext-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "skoda_light";
+  src: url("/fonts/SKODANext-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_light_italic";
+  src: url("/fonts/SKODANext-LightItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "skoda_thin";
+  src: url("/fonts/SKODANext-Thin.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_thin_italic";
+  src: url("/fonts/SKODANext-ThinItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "skoda_arabic_black";
+  src: url("/fonts/SKODANextArabic-Black.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_arabic_bold";
+  src: url("/fonts/SKODANextArabic-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_arabic_light";
+  src: url("/fonts/SKODANextArabic-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_arabic_regular";
+  src: url("/fonts/SKODANextArabic-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_ui_extrabold";
+  src: url("/fonts/SKODANextUIW05-ExtraBold.woff") format("woff"),
+    url("/fonts/SKODANextUIW05-ExtraBold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_ui_medium";
+  src: url("/fonts/SKODANextUIW05-Medium.woff") format("woff"),
+    url("/fonts/SKODANextUIW05-Medium.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "skoda_ui_regular";
+  src: url("/fonts/SKODANextUIW05-Regular.woff") format("woff"),
+    url("/fonts/SKODANextUIW05-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: "skoda_regular", sans-serif;
 }
