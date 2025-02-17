@@ -17,6 +17,9 @@ import { Children, use } from "react";
 import "../index.css";
 import { useState } from "react";
 import Loop_components from "@/survey_components/loop_components";
+import { FaFontAwesome } from "react-icons/fa";
+import Logo from "../survey_components/logo_svg";
+import Restart_symbol from "@/survey_components/restart_symbol";
 //import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
 
 function Select_metaphor() {
@@ -37,8 +40,8 @@ function Select_metaphor() {
       { color: "purple", hex: "#a855f7" },
       { color: "pink", hex: "#ec4899" },
       { color: "cyan", hex: "#06b6d4" },
-      { color: "skoda-light", hex: "#98FB98" },
-      { color: "skoda-dark", hex: "#0E3A2B" },
+      { color: "skoda-light", hex: "#80fcac" },
+      { color: "skoda-dark", hex: "#103c2c" },
     ],
     mainContainer: {
       type: "survey",
@@ -60,16 +63,13 @@ function Select_metaphor() {
       // width: "35%",
       gap: "15px",
     },
-    secondButtonGroup: {
-      // width: "25%",
-      gap: "15px",
-    },
+
     button: {
       borderColor: "white",
       borderStyle: "solid",
       padding_y_axis: 30,
       padding_x_axis: 20,
-      rounded: "true",
+      borderRadius: "100px",
       borderWidth: "3px",
       backgroundColor: "skoda-dark-500",
       selectedStyle: {
@@ -77,7 +77,7 @@ function Select_metaphor() {
         borderStyle: "solid",
         padding_y_axis: 30,
         padding_x_axis: 20,
-        rounded: "true",
+        borderRadius: "100px",
         borderWidth: "3px",
         backgroundColor: "skoda-light-500",
         fontSize: "3xl",
@@ -92,7 +92,7 @@ function Select_metaphor() {
       borderColor: "white",
       width: "15%",
       padding_y_axis: 30,
-      rounded: "true",
+      borderRadius: "100px",
       backgroundColor: "skoda-light-500",
       text: {
         fontStyle: "skoda_bold, sans-serif",
@@ -103,15 +103,8 @@ function Select_metaphor() {
     questionList: {
       questionOne: {
         question: "null",
-        answers: [
-          "DRIVING FOOTAGE 1",
-          "DRIVING FOOTAGE 2",
-          "CHIPMUNK",
-          "RACOON",
-          "CLOUDS",
-          "SNOW DROP",
-          "HUMMINGBIRD",
-        ],
+        answers: ["CHIPMUNK", "RACOON", "CLOUDS", "SNOW DROP", "HUMMINGBIRD"],
+        values: ["Chipmunk", "Racoon", "Clouds", "SnowDrop", "Hummingbird"],
       },
       CHIPMUNK: {
         question: "Chipmunk question",
@@ -153,6 +146,25 @@ function Select_metaphor() {
   };
   useSetDefaultStyles(JSON_data);
 
+  const drivingResponse = new Map();
+  const metaphorResponse = new Map();
+  for (let i = 2; i < JSON_data.questionList.questionOne.answers.length; i++) {
+    metaphorResponse.set(
+      JSON_data.questionList.questionOne.answers[i],
+      JSON_data.questionList.questionOne.values[i]
+    );
+  }
+  for (let i = 0; i < 2; i++) {
+    drivingResponse.set(
+      JSON_data.questionList.questionOne.answers[i],
+      JSON_data.questionList.questionOne.values[i]
+    );
+  }
+
+  console.log("drvingResponse", drivingResponse);
+  console.log("metaphor", metaphorResponse);
+  //
+
   const sendData = async (selection) => {
     console.log("senddata", currentQuestion, selectedValue);
     const response = await fetch(
@@ -176,22 +188,14 @@ function Select_metaphor() {
   }
 
   function submitResponse() {
-    let follow_question = [
-      "CHIPMUNK",
-      "RACOON",
-      "CLOUDS",
-      "SNOW DROP",
-      "HUMMINGBIRD",
-    ];
-    let answers = ["DRIVING FOOTAGE 1", "DRIVING FOOTAGE 2"];
-    if (follow_question.includes(currentQuestion)) {
-      sendData(currentQuestion);
+    if (metaphorResponse.has(currentQuestion)) {
+      sendData(metaphorResponse.get(currentQuestion));
       setCurrentQuestion("FINAL");
       setValueSelected(false);
       return;
     }
-    if (answers.includes(selectedValue)) {
-      sendData(selectedValue);
+    if (drivingResponse.has(selectedValue)) {
+      sendData(drivingResponse.get(selectedValue));
       setCurrentQuestion("FINAL");
       setValueSelected(false);
       return;
@@ -211,7 +215,6 @@ function Select_metaphor() {
   let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
   let questionStyle = Loop_JSON({ JSON: JSON_data.question });
   let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.buttonGroup });
-  let secondButtonGroupStyle = Loop_JSON({ JSON: JSON_data.secondButtonGroup });
   let buttonStyle = Loop_JSON({ JSON: JSON_data.button });
   let buttonClick = Loop_JSON({ JSON: JSON_data.button.selectedStyle });
   let buttonTextStyle = Loop_JSON({ JSON: JSON_data.button.text });
@@ -224,20 +227,24 @@ function Select_metaphor() {
         position="absolute"
         top="0"
         left="0"
-        color="var(--skoda-light-400)"
-        p={4}
+        color="var(--skoda-light-500)"
+        // mt={4}
+        // ml={4}
+        //p={4}
       >
-        SKODA LOGO
+        <Logo></Logo>
       </Box>
       <Box
         position="absolute"
         top="0"
         right="0"
         color="var(--skoda-light-400)"
-        p={4}
+        //mt={4}
+        // h="20px"
+
         onClick={() => restart()}
       >
-        Restart Symbol
+        <Restart_symbol></Restart_symbol>
       </Box>
       <Flex {...flexStyles}>
         <Text
@@ -252,9 +259,7 @@ function Select_metaphor() {
 
         <Stack
           display={currentQuestion === "FINAL" ? "none" : "flex"}
-          {...(currentQuestion === "questionOne"
-            ? buttonGroupStyle
-            : secondButtonGroupStyle)}
+          {...buttonGroupStyle}
         >
           {questionList[currentQuestion].answers.map((answer) =>
             selectedValue !== answer ? (

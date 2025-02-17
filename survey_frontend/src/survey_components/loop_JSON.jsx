@@ -52,8 +52,11 @@ function Loop_JSON({ JSON }) {
   if (JSON.padding_x_axis) {
     chakra_object.px = JSON.padding_x_axis;
   }
-  if (JSON.rounded) {
-    chakra_object.borderRadius = "full";
+  if (JSON.fontWeight) {
+    chakra_object.fontWeight = JSON.fontWeight;
+  }
+  if (JSON.borderRadius) {
+    chakra_object.borderRadius = JSON.borderRadius;
   }
   if (JSON.borderStyle === "solid") {
     chakra_object.borderStyle = "solid";
