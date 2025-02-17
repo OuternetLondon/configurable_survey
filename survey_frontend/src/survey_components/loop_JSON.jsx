@@ -20,6 +20,9 @@ function Loop_JSON({ JSON }) {
   if (JSON.contentStructure) {
     chakra_object.justifyContent = JSON.contentStructure;
   }
+  if (JSON.textAlign) {
+    chakra_object.textAlign = JSON.textAlign;
+  }
   if (JSON.itemsCentered) {
     chakra_object.alignItems = "center";
   }

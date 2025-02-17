@@ -54,10 +54,18 @@ function Select_metaphor() {
       itemsCentered: true,
       image: "/images/background_skoda.jpg",
     },
-    question: {
+    questionOne: {
       fontSize: "5xl",
       color: "white",
       fontStyle: "skoda_bold, sans-serif",
+      textAlign: "center",
+      width: "70%",
+    },
+    questionTwo: {
+      fontSize: "5xl",
+      color: "white",
+      fontStyle: "skoda_bold, sans-serif",
+      textAlign: "center",
     },
     buttonGroup: {
       // width: "35%",
@@ -102,7 +110,8 @@ function Select_metaphor() {
     },
     questionList: {
       questionOne: {
-        question: "null",
+        question:
+          "Nam libero sapien, condimentum ut tellus sed, mattis iaculis pu",
         answers: ["CHIPMUNK", "RACOON", "CLOUDS", "SNOW DROP", "HUMMINGBIRD"],
         values: ["Chipmunk", "Racoon", "Clouds", "SnowDrop", "Hummingbird"],
       },
@@ -146,23 +155,14 @@ function Select_metaphor() {
   };
   useSetDefaultStyles(JSON_data);
 
-  const drivingResponse = new Map();
   const metaphorResponse = new Map();
-  for (let i = 2; i < JSON_data.questionList.questionOne.answers.length; i++) {
+  for (let i = 0; i < JSON_data.questionList.questionOne.answers.length; i++) {
     metaphorResponse.set(
       JSON_data.questionList.questionOne.answers[i],
       JSON_data.questionList.questionOne.values[i]
     );
   }
-  for (let i = 0; i < 2; i++) {
-    drivingResponse.set(
-      JSON_data.questionList.questionOne.answers[i],
-      JSON_data.questionList.questionOne.values[i]
-    );
-  }
 
-  console.log("drvingResponse", drivingResponse);
-  console.log("metaphor", metaphorResponse);
   //
 
   const sendData = async (selection) => {
@@ -194,12 +194,7 @@ function Select_metaphor() {
       setValueSelected(false);
       return;
     }
-    if (drivingResponse.has(selectedValue)) {
-      sendData(drivingResponse.get(selectedValue));
-      setCurrentQuestion("FINAL");
-      setValueSelected(false);
-      return;
-    }
+
     setCurrentQuestion(selectedValue);
     setValueSelected(false);
   }
@@ -213,14 +208,14 @@ function Select_metaphor() {
 
   const questionList = JSON_data.questionList;
   let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
-  let questionStyle = Loop_JSON({ JSON: JSON_data.question });
+  let questionOneStyle = Loop_JSON({ JSON: JSON_data.questionOne });
+  let questionTwoStyle = Loop_JSON({ JSON: JSON_data.questionTwo });
   let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.buttonGroup });
   let buttonStyle = Loop_JSON({ JSON: JSON_data.button });
   let buttonClick = Loop_JSON({ JSON: JSON_data.button.selectedStyle });
   let buttonTextStyle = Loop_JSON({ JSON: JSON_data.button.text });
   let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
   let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
-  console.log("questionStyle", questionStyle.fontSize);
   return (
     <>
       <Box
@@ -248,10 +243,14 @@ function Select_metaphor() {
       </Box>
       <Flex {...flexStyles}>
         <Text
-          visibility={currentQuestion === "questionOne" && "hidden"}
-          {...questionStyle}
+          // visibility={currentQuestion === "questionOne" && "hidden"}
+          {...(currentQuestion === "questionOne"
+            ? questionOneStyle
+            : questionTwoStyle)}
           fontSize={
-            currentQuestion === "FINAL" ? "95px" : JSON_data.question.fontSize
+            currentQuestion === "FINAL"
+              ? "95px"
+              : JSON_data.questionOne.fontSize
           }
         >
           {questionList[currentQuestion].question}
