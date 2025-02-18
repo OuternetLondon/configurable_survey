@@ -6,8 +6,14 @@ function Loop_JSON({ JSON }) {
   if (JSON.height) {
     chakra_object.h = JSON.height;
   }
+  if (JSON.size) {
+    chakra_object.size = JSON.size;
+  }
   if (JSON.width) {
     chakra_object.w = JSON.width;
+  }
+  if (JSON.padding) {
+    chakra_object.p = JSON.padding;
   }
   if (JSON.direction) {
     if (JSON.direction === "horizontal") {
@@ -65,6 +71,10 @@ function Loop_JSON({ JSON }) {
     chakra_object.borderStyle = "solid";
     chakra_object.borderWidth = JSON.borderWidth;
     chakra_object.borderColor = `var(--${JSON.borderColor})`;
+  }
+
+  if (JSON.outlineColor) {
+    chakra_object.outline = `${JSON.outlineWidth} solid var(--${JSON.outlineColor})`;
   }
   if (JSON.backgroundColor) {
     chakra_object.bg = `var(--${JSON.backgroundColor})`;

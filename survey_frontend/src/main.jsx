@@ -15,10 +15,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
-  {
-    path: "/select",
-    element: <Select_metaphor />,
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -9,6 +9,7 @@ import {
   Flex,
   Box,
   Text,
+  Select,
 } from "@chakra-ui/react";
 import Loop_JSON from "@/survey_components/loop_JSON";
 import chroma from "chroma-js";
@@ -17,17 +18,22 @@ import { Children, use } from "react";
 import "../index.css";
 import { useState } from "react";
 import Loop_components from "@/survey_components/loop_components";
-import { FaFontAwesome } from "react-icons/fa";
 import Logo from "../survey_components/logo_svg";
 import Restart_symbol from "@/survey_components/restart_symbol";
+import Select_metaphor from "./Select_metaphor";
+import Question_page from "./Question_page";
+import Final from "./final_page";
 //import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState("");
-  const [valueSelected, setValueSelected] = useState(false);
+  const [clickedButton, setClickedButton] = useState("");
+
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
   const [finalAnswer, setFinalAnswer] = useState(false);
 
+  console.log("selectedValue", selectedValue);
+  console.log("currentQuestion", currentQuestion);
   const JSON_data = {
     default_colors: [
       { color: "gray", hex: "#52525b" },
@@ -40,6 +46,7 @@ function App() {
       { color: "purple", hex: "#a855f7" },
       { color: "pink", hex: "#ec4899" },
       { color: "cyan", hex: "#06b6d4" },
+      { color: "white", hex: "#ffffff" },
       { color: "skoda-light", hex: "#80fcac" },
       { color: "skoda-dark", hex: "#103c2c" },
     ],
@@ -59,7 +66,7 @@ function App() {
       color: "white",
       fontStyle: "skoda_bold, sans-serif",
       textAlign: "center",
-      width: "70%",
+      width: "80%",
     },
     questionTwo: {
       fontSize: "5xl",
@@ -67,12 +74,41 @@ function App() {
       fontStyle: "skoda_bold, sans-serif",
       textAlign: "center",
     },
-    buttonGroup: {
-      // width: "35%",
-      gap: "15px",
+    q1_buttonGroup: {
+      padding_x_axis: "50px",
+      contentStructure: "space-evenly",
+      width: "100%",
+      gap: "50px",
+      direction: "horizontal",
+      display: "flex",
     },
-
-    button: {
+    q2_buttonGroup: {
+      gap: "15px",
+      direction: "vertical",
+      display: "flex",
+    },
+    q1_button: {
+      size: "xl",
+      height: "200px",
+      width: "200px",
+      borderRadius: "30px",
+      backgroundColor: "skoda-light-500",
+      selectedStyle: {
+        backgroundColor: "skoda-light-500",
+        outlineColor: "blue-500",
+        outlineStyle: "solid",
+        outlineWidth: "7px",
+        size: "xl",
+        height: "200px",
+        width: "200px",
+        borderRadius: "30px",
+      },
+      text: {
+        fontSize: "3xl",
+        fontStyle: "skoda_bold, sans-serif",
+      },
+    },
+    q2_button: {
       borderColor: "white",
       borderStyle: "solid",
       padding_y_axis: 30,
@@ -92,7 +128,7 @@ function App() {
         color: "black",
       },
       text: {
-        fontSize: "3xl",
+        fontSize: "4xl",
         fontStyle: "skoda_bold, sans-serif",
       },
     },
@@ -155,16 +191,7 @@ function App() {
   };
   useSetDefaultStyles(JSON_data);
 
-  const metaphorResponse = new Map();
-  for (let i = 0; i < JSON_data.questionList.questionOne.answers.length; i++) {
-    metaphorResponse.set(
-      JSON_data.questionList.questionOne.answers[i],
-      JSON_data.questionList.questionOne.values[i]
-    );
-  }
-
   const sendData = async (selection) => {
-    console.log("senddata", currentQuestion, selectedValue);
     const response = await fetch(
       `${import.meta.env.VITE_BACKEND_URL}/survey_data`,
       {
@@ -179,41 +206,31 @@ function App() {
     console.log("result", result);
   };
 
-  function selectButton(button) {
-    setSelectedValue(button);
-    setValueSelected(true);
-    console.log("selectedValue", selectedValue);
+  const metaphorResponse = new Map();
+  for (let i = 0; i < JSON_data.questionList.questionOne.answers.length; i++) {
+    metaphorResponse.set(
+      JSON_data.questionList.questionOne.answers[i],
+      JSON_data.questionList.questionOne.values[i]
+    );
   }
 
   function submitResponse() {
-    if (metaphorResponse.has(currentQuestion)) {
-      sendData(metaphorResponse.get(currentQuestion));
+    if (metaphorResponse.has(selectedValue)) {
+      sendData(metaphorResponse.get(selectedValue));
       setCurrentQuestion("FINAL");
-      setValueSelected(false);
+      // setValueSelected(false);
       return;
     }
-
-    setCurrentQuestion(selectedValue);
-    setValueSelected(false);
   }
 
   function restart() {
     setCurrentQuestion("questionOne");
     setSelectedValue("");
-    setValueSelected("");
+    setClickedButton;
+    // setValueSelected("");
     setFinalAnswer(false);
   }
 
-  const questionList = JSON_data.questionList;
-  let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
-  let questionOneStyle = Loop_JSON({ JSON: JSON_data.questionOne });
-  let questionTwoStyle = Loop_JSON({ JSON: JSON_data.questionTwo });
-  let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.buttonGroup });
-  let buttonStyle = Loop_JSON({ JSON: JSON_data.button });
-  let buttonClick = Loop_JSON({ JSON: JSON_data.button.selectedStyle });
-  let buttonTextStyle = Loop_JSON({ JSON: JSON_data.button.text });
-  let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
-  let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
   return (
     <>
       <Box
@@ -239,65 +256,36 @@ function App() {
       >
         <Restart_symbol></Restart_symbol>
       </Box>
-      <Flex {...flexStyles}>
-        <Text
-          {...(currentQuestion === "questionOne"
-            ? questionOneStyle
-            : questionTwoStyle)}
-          fontSize={
-            currentQuestion === "FINAL"
-              ? "95px"
-              : JSON_data.questionOne.fontSize
-          }
-        >
-          {questionList[currentQuestion].question}
-        </Text>
-
-        <Stack
-          display={currentQuestion === "FINAL" ? "none" : "flex"}
-          {...buttonGroupStyle}
-        >
-          {questionList[currentQuestion].answers.map((answer) =>
-            selectedValue !== answer ? (
-              <Button
-                key={answer}
-                {...buttonStyle}
-                onClick={() => selectButton(answer)}
-              >
-                <Text {...buttonTextStyle}>{answer}</Text>
-              </Button>
-            ) : (
-              <Button
-                key={answer}
-                {...buttonClick}
-                onClick={() => selectButton(answer)}
-              >
-                <Text {...buttonTextStyle}>{answer}</Text>
-              </Button>
-            )
-          )}
-        </Stack>
-
-        {valueSelected ? (
-          <Button
-            {...confirmButtonStyle}
-            onClick={() => submitResponse()}
-            display={currentQuestion === "FINAL" && "none"}
-          >
-            <Text {...confirmText}>
-              {currentQuestion === "questionOne" ? "Confirm" : "Reveal"}
-            </Text>
-          </Button>
-        ) : (
-          <Button
-            {...confirmButtonStyle}
-            visibility="hidden"
-            display={currentQuestion === "FINAL" && "none"}
-          >
-            <Text {...confirmText}>Confirm</Text>
-          </Button>
-        )}
-      </Flex>
+      {currentQuestion === "questionOne" && (
+        <Select_metaphor
+          JSON_data={JSON_data}
+          currentQuestion={currentQuestion}
+          selectedValue={selectedValue}
+          setSelectedValue={setSelectedValue}
+          setCurrentQuestion={setCurrentQuestion}
+          submitResponse={submitResponse}
+          clickedButton={clickedButton}
+          setClickedButton={setClickedButton}
+        ></Select_metaphor>
+      )}
+      {currentQuestion !== "questionOne" && currentQuestion !== "FINAL" && (
+        <Question_page
+          JSON_data={JSON_data}
+          currentQuestion={currentQuestion}
+          selectedValue={selectedValue}
+          submitResponse={submitResponse}
+          clickedButton={clickedButton}
+          setClickedButton={setClickedButton}
+        ></Question_page>
+      )}
+      {currentQuestion === "FINAL" && (
+        <Final
+          JSON_data={JSON_data}
+          currentQuestion={currentQuestion}
+          selectedValue={selectedValue}
+          submitResponse={submitResponse}
+        ></Final>
+      )}
     </>
   );
 }
