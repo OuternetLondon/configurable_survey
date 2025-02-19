@@ -32,7 +32,7 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
   const [finalAnswer, setFinalAnswer] = useState(false);
 
-  useMobileFriendly();
+  //useMobileFriendly();
   console.log("selectedValue", selectedValue);
   console.log("currentQuestion", currentQuestion);
   const JSON_data = {
@@ -50,27 +50,26 @@ function App() {
       { color: "white", hex: "#ffffff" },
       { color: "skoda-light", hex: "#80fcac" },
       { color: "skoda-dark", hex: "#103c2c" },
+      { color: "skoda-logo", hex: "#23fda6" },
     ],
     mainContainer: {
-      type: "survey",
-      format: "flex",
-      name: "main_container",
-      direction: "vertical",
       height: "100vh",
       width: "100vw",
-      contentStructure: "space-evenly",
-      itemsCentered: true,
-      image: "/images/background_skoda.jpg",
+      display: "flex",
+      direction: "vertical",
+      justifyContent: "center",
+      alignItems: "center",
+      image: "/images/skoda_background.png",
     },
     questionOne: {
       fontSize: "5xl",
       color: "white",
       fontStyle: "skoda_bold, sans-serif",
       textAlign: "center",
-      width: "80%",
+      width: "100%",
     },
     questionTwo: {
-      fontSize: "5xl",
+      fontSize: "4xl",
       color: "white",
       fontStyle: "skoda_bold, sans-serif",
       textAlign: "center",
@@ -84,16 +83,13 @@ function App() {
       display: "flex",
     },
     q2_buttonGroup: {
-      gap: "15px",
+      gap: "30px",
       direction: "vertical",
       display: "flex",
     },
     q1_button: {
-      size: "xl",
       height: "200px",
       width: "200px",
-      borderRadius: "30px",
-      backgroundColor: "skoda-light-500",
       selectedStyle: {
         backgroundColor: "skoda-light-500",
         outlineColor: "blue-500",
@@ -110,26 +106,27 @@ function App() {
       },
     },
     q2_button: {
-      borderColor: "white",
+      borderColor: "skoda-logo-500",
       borderStyle: "solid",
-      padding_y_axis: 30,
-      padding_x_axis: 20,
+      padding_y_axis: "30px",
+      padding_x_axis: "110px",
       borderRadius: "100px",
       borderWidth: "3px",
-      backgroundColor: "skoda-dark-500",
+      //  backgroundColor: "skoda-dark-500",
       selectedStyle: {
         borderColor: "skoda-light-500",
         borderStyle: "solid",
-        padding_y_axis: 30,
-        padding_x_axis: 20,
+        padding_y_axis: "30px",
+        padding_x_axis: "110px",
         borderRadius: "100px",
         borderWidth: "3px",
-        backgroundColor: "skoda-light-500",
-        fontSize: "3xl",
+        backgroundColor: "skoda-dark-500",
+        fontSize: "40px",
+
         color: "black",
       },
       text: {
-        fontSize: "4xl",
+        fontSize: "40px",
         fontStyle: "skoda_bold, sans-serif",
       },
     },
@@ -147,8 +144,7 @@ function App() {
     },
     questionList: {
       questionOne: {
-        question:
-          "Nam libero sapien, condimentum ut tellus sed, mattis iaculis pu",
+        question: "Select to play",
         answers: ["CHIPMUNK", "RACOON", "CLOUDS", "SNOW DROP", "HUMMINGBIRD"],
         values: ["Chipmunk", "Racoon", "Clouds", "SnowDrop", "Hummingbird"],
       },
@@ -162,7 +158,7 @@ function App() {
       },
       RACOON: {
         question: "What is the link between a Racoon and a Skoda Elroq?",
-        answers: ["Fur", "Storage", "Tail"],
+        answers: ["Fur", "Storage", "Sight", "Tail"],
       },
       CLOUDS: {
         question: "Clouds question",
@@ -232,61 +228,77 @@ function App() {
     setFinalAnswer(false);
   }
 
+  let mainContainer = Loop_JSON({ JSON: JSON_data.mainContainer });
+
   return (
     <>
-      <Box
-        position="absolute"
-        top="0"
-        left="0"
-        color="var(--skoda-light-500)"
-        // mt={4}
-        // ml={4}
-        //p={4}
+      <div
+        style={{
+          backgroundImage: `url(/images/skoda_background.png)`,
+          height: "100vh",
+          width: "100vw",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <Logo></Logo>
-      </Box>
-      <Box
-        position="absolute"
-        top="0"
-        right="0"
-        color="var(--skoda-light-400)"
-        //mt={4}
-        // h="20px"
+        <Flex
+          position="absolute"
+          bottom="12"
+          justifyContent="center"
+          color="var(--skoda-logo-500)"
+          width={"100%"}
+          // mt={4}
+          // ml={4}
+          //p={4}
+        >
+          <Logo></Logo>
+        </Flex>
+        <Box
+          position="absolute"
+          top="0"
+          right="0"
+          color="var(--skoda-logo-400)"
+          //mt={4}
+          // h="20px"
 
-        onClick={() => restart()}
-      >
-        <Restart_symbol></Restart_symbol>
-      </Box>
-      {currentQuestion === "questionOne" && (
-        <Select_metaphor
-          JSON_data={JSON_data}
-          currentQuestion={currentQuestion}
-          selectedValue={selectedValue}
-          setSelectedValue={setSelectedValue}
-          setCurrentQuestion={setCurrentQuestion}
-          submitResponse={submitResponse}
-          clickedButton={clickedButton}
-          setClickedButton={setClickedButton}
-        ></Select_metaphor>
-      )}
-      {currentQuestion !== "questionOne" && currentQuestion !== "FINAL" && (
-        <Question_page
-          JSON_data={JSON_data}
-          currentQuestion={currentQuestion}
-          selectedValue={selectedValue}
-          submitResponse={submitResponse}
-          clickedButton={clickedButton}
-          setClickedButton={setClickedButton}
-        ></Question_page>
-      )}
-      {currentQuestion === "FINAL" && (
-        <Final
-          JSON_data={JSON_data}
-          currentQuestion={currentQuestion}
-          selectedValue={selectedValue}
-          submitResponse={submitResponse}
-        ></Final>
-      )}
+          onClick={() => restart()}
+        >
+          <Restart_symbol></Restart_symbol>
+        </Box>
+        {currentQuestion === "questionOne" && (
+          <Select_metaphor
+            JSON_data={JSON_data}
+            currentQuestion={currentQuestion}
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+            setCurrentQuestion={setCurrentQuestion}
+            submitResponse={submitResponse}
+            clickedButton={clickedButton}
+            setClickedButton={setClickedButton}
+          ></Select_metaphor>
+        )}
+        {currentQuestion !== "questionOne" && currentQuestion !== "FINAL" && (
+          <Question_page
+            JSON_data={JSON_data}
+            currentQuestion={currentQuestion}
+            selectedValue={selectedValue}
+            submitResponse={submitResponse}
+            clickedButton={clickedButton}
+            setClickedButton={setClickedButton}
+          ></Question_page>
+        )}
+        {currentQuestion === "FINAL" && (
+          <Final
+            JSON_data={JSON_data}
+            currentQuestion={currentQuestion}
+            selectedValue={selectedValue}
+            submitResponse={submitResponse}
+          ></Final>
+        )}
+      </div>
     </>
   );
 }

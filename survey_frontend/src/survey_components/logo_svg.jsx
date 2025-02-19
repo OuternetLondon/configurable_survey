@@ -13,7 +13,7 @@ const LogoSvg = () => {
         <style>
           {`
             .cls-1 { fill: none; }
-            .cls-2, .cls-3 { fill: #80fcac; }
+            .cls-2, .cls-3 { fill: #23fda6; }
             .cls-3 {
               font-family: 'SKODANext-Light', 'SKODANext Light';
               font-size: 22.25px;

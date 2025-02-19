@@ -1,7 +1,7 @@
 const Restart_symbol = () => {
   return (
     <svg
-      fill="#80fcac"
+      fill="#23fda6"
       viewBox="-6 5 24 24"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

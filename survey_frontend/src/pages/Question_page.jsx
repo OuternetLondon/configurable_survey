@@ -44,34 +44,71 @@ function Question_page({
 
   function clickButton(answer) {
     setClickedButton(answer);
+
+    setTimeout(() => {
+      setClickedButton("");
+      submitResponse();
+    }, 1500);
   }
   return (
     <>
-      <Flex {...flexStyles}>
+      <Flex
+        {...flexStyles}
+        justifyContent={"space-evenly"}
+        alignItems={"center"}
+        width="100%"
+      >
         <Text {...questionTwoStyle}>
           {questionList[selectedValue].question}
         </Text>
-        <Flex {...buttonGroupStyle}>
-          {questionList[selectedValue].answers.map((answer) => (
-            <Button
-              key={answer}
-              {...(clickedButton === answer ? buttonClick : buttonStyle)}
-              onClick={() => clickButton(answer)}
-            >
-              <Text {...buttonTextStyle}>{answer}</Text>
-            </Button>
-          ))}
-        </Flex>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: "url(/images/RACCOON_HERO.png)",
+              position: "absolute",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              height: "170px",
+              width: "180px",
+            }}
+          ></div>
+          <Flex {...buttonGroupStyle}>
+            {questionList[selectedValue].answers.map((answer) => (
+              <Button
+                key={answer}
+                style={{
+                  background: "transparent",
+                  backdropFilter: "blur(20px)",
+                  ...(clickedButton === answer
+                    ? {
+                        transform: "scale(1.2)",
+                        opacity: 0.85,
+                        transition:
+                          "transform 0.5s ease-in-out, color 0.5s ease-in-out",
+                        backgroundColor: "#80fcac",
+                      }
+                    : {}),
+                }}
+                {...(clickedButton === answer ? buttonClick : buttonStyle)}
+                onClick={() => clickButton(answer)}
+              >
+                <Text {...buttonTextStyle}>{answer}</Text>
+              </Button>
+            ))}
+          </Flex>
+          <p>image</p>
+        </div>
 
-        {clickedButton ? (
-          <Button {...confirmButtonStyle} onClick={() => submitResponse()}>
-            <Text {...confirmText}>Confirm</Text>
-          </Button>
-        ) : (
-          <Button {...confirmButtonStyle} visibility="hidden">
-            <Text {...confirmText}>Confirm</Text>
-          </Button>
-        )}
+        <Button {...confirmButtonStyle} visibility="hidden">
+          <Text {...confirmText}>Confirm</Text>
+        </Button>
       </Flex>
     </>
   );

@@ -34,7 +34,13 @@ function Select_metaphor({
 
   function clickButton(answer) {
     setClickedButton(answer);
-    setSelectedValue(answer);
+
+    setTimeout(() => {
+      setSelectedValue(answer);
+      setClickedButton("");
+      setCurrentQuestion("questionTwo");
+    }, 1500);
+
     console.log(answer);
   }
 
@@ -44,53 +50,104 @@ function Select_metaphor({
   }
 
   const imageMap = {
-    CHIPMUNK: "/images/CHIPMUNK.png",
+    CHIPMUNK: "/images/CHIPMUNK_HERO_2.png",
     "SNOW DROP": "/images/FLOWER_HERO.png",
-    CLOUDS: "/images/CLOUD_HERO_2.png",
-    HUMMINGBIRD: "/images/HUMMINGBIRD_02.png",
+    CLOUDS: "/images/CLOUD_HERO.png",
+    HUMMINGBIRD: "/images/HUMMINGBIRD_HERO.png",
     RACOON: "/images/RACCOON_HERO.png",
   };
 
   const imageStyles = {
-    CHIPMUNK: { backgroundSize: "cover", backgroundPosition: "center" },
-    "SNOW DROP": { backgroundSize: "180%", backgroundPosition: "110% -5%" },
-    CLOUDS: { backgroundSize: "400%", backgroundPosition: "25% 50%" },
-    HUMMINGBIRD: { backgroundSize: "cover", backgroundPosition: "center" },
-    RACOON: { backgroundSize: "cover", backgroundPosition: "center" },
+    CLOUDS: {
+      position: "absolute",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "120px",
+      width: "250px",
+      top: "15%",
+      left: "35%",
+      transform: `translateX(-50%)`,
+    },
+    HUMMINGBIRD: {
+      position: "absolute",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "170px",
+      width: "250px",
+      top: "11%",
+      right: "20%",
+      transform: `translateX(-50%)`,
+    },
+
+    "SNOW DROP": {
+      position: "absolute",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "110px",
+      width: "290px",
+      bottom: "38%",
+      right: "7%",
+      transform: `translateX(-50%)`,
+    },
+
+    RACOON: {
+      position: "absolute",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "170px",
+      width: "180px",
+      bottom: "38%",
+      left: "25%",
+      transform: `translateX(-50%)`,
+    },
+    CHIPMUNK: {
+      position: "absolute",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "170px",
+      width: "250px",
+      bottom: "20%",
+      left: "50%",
+      transform: `translateX(-50%)`,
+    },
   };
 
   return (
     <>
-      <Flex {...flexStyles}>
-        <Text {...questionOneStyle}>
+      <div
+        style={{
+          position: "relative",
+          width: `100%`,
+          height: `100%`,
+          display: `flex`,
+          justifyContent: `center`,
+          alignItems: `center`,
+        }}
+      >
+        <Text {...questionOneStyle} mb={28}>
           {questionList["questionOne"].question}
         </Text>
-        <Flex {...buttonGroupStyle}>
-          {questionList["questionOne"].answers.map((answer) => (
-            <Button
-              key={answer}
-              {...(clickedButton === answer ? buttonClick : buttonStyle)}
-              style={{
-                backgroundImage: imageMap[answer]
-                  ? `url(${imageMap[answer]})`
-                  : undefined,
-                ...imageStyles[answer],
-              }}
-              onClick={() => clickButton(answer)}
-            ></Button>
-          ))}
-        </Flex>
-
-        {clickedButton ? (
-          <Button {...confirmButtonStyle} onClick={() => submit()}>
-            <Text {...confirmText}>Confirm</Text>
-          </Button>
-        ) : (
-          <Button {...confirmButtonStyle} visibility="hidden">
-            <Text {...confirmText}>Confirm</Text>
-          </Button>
-        )}
-      </Flex>
+        {questionList["questionOne"].answers.map((answer) => (
+          <div
+            key={answer}
+            {...(clickedButton === answer ? buttonClick : buttonStyle)}
+            style={{
+              backgroundImage: imageMap[answer]
+                ? `url(${imageMap[answer]})`
+                : undefined,
+              ...imageStyles[answer],
+              ...(clickedButton === answer
+                ? {
+                    transform: "scale(1.5) translate(-30%, -10%)",
+                    opacity: 0.85,
+                  }
+                : {}),
+              transition: "transform 0.5s ease-in-out",
+            }}
+            onClick={() => clickButton(answer)}
+          ></div>
+        ))}
+      </div>
     </>
   );
 }
