@@ -32,9 +32,9 @@ function Final({ JSON_data, selectedValue }) {
   let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
 
   const imageMap = {
-    CHIPMUNK: "/images/CHIPMUNK_HERO.png",
+    CHIPMUNK: "/images/CHIPMUNK_HERO_2.png",
     "SNOW DROP": "/images/FLOWER_HERO.png",
-    CLOUDS: "/images/CLOUD_HERO.png",
+    CLOUDS: "/images/CLOUD_HERO_2.png",
     HUMMINGBIRD: "/images/HUMMINGBIRD_02.png",
     RACOON: "/images/RACCOON_HERO.png",
   };

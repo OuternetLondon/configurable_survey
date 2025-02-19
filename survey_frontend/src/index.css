@@ -1,3 +1,17 @@
+* {
+  user-select: none;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  touch-action: none; /* Disable gestures */
+  user-select: none; /* Prevent text selection */
+  -webkit-user-drag: none; /* Prevent dragging */
+}
+
 @font-face {
   font-family: "skoda_bold";
   src: url("/fonts/SKODANext-Bold.ttf") format("truetype");

@@ -48,7 +48,7 @@ function Question_page({
   return (
     <>
       <Flex {...flexStyles}>
-        <Text {...questionOneStyle}>
+        <Text {...questionTwoStyle}>
           {questionList[selectedValue].question}
         </Text>
         <Flex {...buttonGroupStyle}>

@@ -14,6 +14,7 @@ import {
 import Loop_JSON from "@/survey_components/loop_JSON";
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
+import useMobileFriendly from "@/hooks/useMobileFriendly";
 import { Children, use } from "react";
 import "../index.css";
 import { useState } from "react";
@@ -31,6 +32,7 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
   const [finalAnswer, setFinalAnswer] = useState(false);
 
+  useMobileFriendly();
   console.log("selectedValue", selectedValue);
   console.log("currentQuestion", currentQuestion);
   const JSON_data = {

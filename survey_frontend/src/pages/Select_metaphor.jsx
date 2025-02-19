@@ -46,7 +46,7 @@ function Select_metaphor({
   const imageMap = {
     CHIPMUNK: "/images/CHIPMUNK.png",
     "SNOW DROP": "/images/FLOWER_HERO.png",
-    CLOUDS: "/images/CLOUD_HERO.png",
+    CLOUDS: "/images/CLOUD_HERO_2.png",
     HUMMINGBIRD: "/images/HUMMINGBIRD_02.png",
     RACOON: "/images/RACCOON_HERO.png",
   };
