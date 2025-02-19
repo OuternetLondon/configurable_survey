@@ -15,8 +15,6 @@ import "../index.css";
 import { useState } from "react";
 import Loop_components from "@/survey_components/loop_components";
 
-//import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
-
 function Select_metaphor({
   JSON_data,
   setSelectedValue,
@@ -40,12 +38,25 @@ function Select_metaphor({
     console.log(answer);
   }
 
+  function submit() {
+    setCurrentQuestion("questionTwo");
+    setClickedButton("");
+  }
+
   const imageMap = {
     CHIPMUNK: "/images/CHIPMUNK.png",
     "SNOW DROP": "/images/FLOWER_HERO.png",
     CLOUDS: "/images/CLOUD_HERO.png",
     HUMMINGBIRD: "/images/HUMMINGBIRD_02.png",
     RACOON: "/images/RACCOON_HERO.png",
+  };
+
+  const imageStyles = {
+    CHIPMUNK: { backgroundSize: "cover", backgroundPosition: "center" },
+    "SNOW DROP": { backgroundSize: "180%", backgroundPosition: "110% -5%" },
+    CLOUDS: { backgroundSize: "400%", backgroundPosition: "25% 50%" },
+    HUMMINGBIRD: { backgroundSize: "cover", backgroundPosition: "center" },
+    RACOON: { backgroundSize: "cover", backgroundPosition: "center" },
   };
 
   return (
@@ -63,8 +74,7 @@ function Select_metaphor({
                 backgroundImage: imageMap[answer]
                   ? `url(${imageMap[answer]})`
                   : undefined,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                ...imageStyles[answer],
               }}
               onClick={() => clickButton(answer)}
             ></Button>
@@ -72,10 +82,7 @@ function Select_metaphor({
         </Flex>
 
         {clickedButton ? (
-          <Button
-            {...confirmButtonStyle}
-            onClick={() => setCurrentQuestion("questionTwo")}
-          >
+          <Button {...confirmButtonStyle} onClick={() => submit()}>
             <Text {...confirmText}>Confirm</Text>
           </Button>
         ) : (

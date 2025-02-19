@@ -30,6 +30,6 @@ app.post("/survey_data", (req, res) => {
   io.emit("survey_data", req.body.selection);
 });
 
-server.listen(port, () => {
+server.listen(port, "0.0.0.0", () => {
   console.log(`Servers is running on http://localhost:${port}`);
 });

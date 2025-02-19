@@ -23,7 +23,6 @@ import Restart_symbol from "@/survey_components/restart_symbol";
 import Select_metaphor from "./Select_metaphor";
 import Question_page from "./Question_page";
 import Final from "./final_page";
-//import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState("");
@@ -226,7 +225,7 @@ function App() {
   function restart() {
     setCurrentQuestion("questionOne");
     setSelectedValue("");
-    setClickedButton;
+    setClickedButton("");
     // setValueSelected("");
     setFinalAnswer(false);
   }

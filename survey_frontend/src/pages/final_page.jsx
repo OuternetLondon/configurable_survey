@@ -20,7 +20,6 @@ import Loop_components from "@/survey_components/loop_components";
 import { FaFontAwesome } from "react-icons/fa";
 import Logo from "../survey_components/logo_svg";
 import Restart_symbol from "@/survey_components/restart_symbol";
-//import bgImage from "../images/O_bty190_BG_REF_12x6_v3.1001.jpeg";
 
 function Final({ JSON_data, selectedValue }) {
   const questionList = JSON_data.questionList;
