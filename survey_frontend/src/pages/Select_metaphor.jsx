@@ -23,14 +23,7 @@ function Select_metaphor({
   setClickedButton,
 }) {
   const questionList = JSON_data.questionList;
-  let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
-  let questionOneStyle = Loop_JSON({ JSON: JSON_data.questionOne });
-  let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.q1_buttonGroup });
-  let buttonStyle = Loop_JSON({ JSON: JSON_data.q1_button });
-  let buttonClick = Loop_JSON({ JSON: JSON_data.q1_button.selectedStyle });
-  let buttonTextStyle = Loop_JSON({ JSON: JSON_data.q1_button.text });
-  let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
-  let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
+  let questionOneStyle = JSON_data.questionOne;
 
   function clickButton(answer) {
     setClickedButton(answer);
@@ -124,13 +117,12 @@ function Select_metaphor({
           alignItems: `center`,
         }}
       >
-        <Text {...questionOneStyle} mb={28}>
+        <p style={{ ...questionOneStyle }}>
           {questionList["questionOne"].question}
-        </Text>
+        </p>
         {questionList["questionOne"].answers.map((answer) => (
           <div
             key={answer}
-            {...(clickedButton === answer ? buttonClick : buttonStyle)}
             style={{
               backgroundImage: imageMap[answer]
                 ? `url(${imageMap[answer]})`

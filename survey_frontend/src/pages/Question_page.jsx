@@ -32,15 +32,12 @@ function Question_page({
   setClickedButton,
 }) {
   const questionList = JSON_data.questionList;
-  let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
-  let questionOneStyle = Loop_JSON({ JSON: JSON_data.questionOne });
-  let questionTwoStyle = Loop_JSON({ JSON: JSON_data.questionTwo });
-  let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.q2_buttonGroup });
-  let buttonStyle = Loop_JSON({ JSON: JSON_data.q2_button });
-  let buttonClick = Loop_JSON({ JSON: JSON_data.q2_button.selectedStyle });
-  let buttonTextStyle = Loop_JSON({ JSON: JSON_data.q2_button.text });
-  let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
-  let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
+  let flexStyles = JSON_data.mainContainer;
+  let questionTwoStyle = JSON_data.questionTwo;
+  let buttonGroupStyle = JSON_data.q2_buttonGroup;
+  let buttonStyle = JSON_data.q2_button;
+  let buttonClick = JSON_data.q2_button.selectedStyle;
+  let buttonTextStyle = JSON_data.q2_button.text;
 
   function clickButton(answer) {
     setClickedButton(answer);
@@ -93,17 +90,22 @@ function Question_page({
       width: "250px",
     },
   };
+
   return (
     <>
-      <Flex
-        {...flexStyles}
-        justifyContent={"space-evenly"}
-        alignItems={"center"}
-        width="100%"
+      <div
+        style={{
+          ...flexStyles,
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        <Text {...questionTwoStyle}>
+        <p style={{ ...questionTwoStyle }}>
           {questionList[selectedValue].question}
-        </Text>
+        </p>
         <div
           /*  style={{
             display: "flex",
@@ -128,29 +130,47 @@ function Question_page({
               ...imageStyles[selectedValue],
             }}
           ></div>
-          <Flex {...buttonGroupStyle}>
+          <div style={{ ...buttonGroupStyle }}>
             {questionList[selectedValue].answers.map((answer) => (
-              <Button
+              <button
                 key={answer}
                 style={{
-                  background: "transparent",
-                  backdropFilter: "blur(20px)",
-                  ...(clickedButton === answer
+                  //maxWidth: "100%",
+                  maxWidth: "470px",
+                  minWidth: "430px",
+                  //minWidth: "80%",
+                  /* whiteSpace: "normal",
+                  wordWrap: "break-word",
+                  textAlign: "center",*/
+
+                  /* ...(clickedButton === answer
                     ? {
+                        maxWidth: "500px",
+                        minWidth: "400px",
                         transform: "scale(1.2)",
                         opacity: 0.85,
                         transition: "transform 0.5s ease-in-out",
-                        backgroundColor: "#80fcac",
+                        backgroundColor: "#9AF7B4",
+                        color: "#1B392F",
                       }
-                    : {}),
+                    : {}),*/
+                  ...(clickedButton === answer ? buttonClick : buttonStyle),
                 }}
-                {...(clickedButton === answer ? buttonClick : buttonStyle)}
                 onClick={() => clickButton(answer)}
               >
-                <Text {...buttonTextStyle}>{answer}</Text>
-              </Button>
+                <p
+                  style={{
+                    ...buttonTextStyle,
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    textAlign: "center",
+                  }}
+                >
+                  {answer}
+                </p>
+              </button>
             ))}
-          </Flex>
+          </div>
           <div
             style={{
               backgroundImage: "url(/images/CAR_HERO.png)",
@@ -159,15 +179,16 @@ function Question_page({
               height: "240px",
               width: "460px",
               marginTop: "60px",
+              marginLeft: "50px",
               //  marginLeft: "70px",
             }}
           ></div>
         </div>
 
-        <Button {...confirmButtonStyle} visibility="hidden">
-          <Text {...confirmText}>Confirm</Text>
+        <Button visibility="hidden">
+          <Text>Confirm</Text>
         </Button>
-      </Flex>
+      </div>
     </>
   );
 }

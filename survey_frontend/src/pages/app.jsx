@@ -35,6 +35,10 @@ function App() {
   //useMobileFriendly();
   console.log("selectedValue", selectedValue);
   console.log("currentQuestion", currentQuestion);
+  let added_colors = {
+    "skoda-light": "#9AF7B4",
+    "skoda-dark": "#1B392F",
+  };
   const JSON_data = {
     default_colors: [
       { color: "gray", hex: "#52525b" },
@@ -48,30 +52,30 @@ function App() {
       { color: "pink", hex: "#ec4899" },
       { color: "cyan", hex: "#06b6d4" },
       { color: "white", hex: "#ffffff" },
-      { color: "skoda-light", hex: "#80fcac" },
-      { color: "skoda-dark", hex: "#103c2c" },
+      { color: "skoda-light", hex: "#9AF7B4" },
+      { color: "skoda-dark", hex: "#1B392F" },
       { color: "skoda-logo", hex: "#23fda6" },
     ],
     mainContainer: {
       height: "100vh",
       width: "100vw",
       display: "flex",
-      direction: "vertical",
       justifyContent: "center",
       alignItems: "center",
       image: "/images/skoda_background.png",
     },
     questionOne: {
-      fontSize: "6xl",
+      fontSize: "60px",
       color: "white",
-      fontStyle: "skoda_bold, sans-serif",
+      fontFamily: "skoda_bold, sans-serif",
       textAlign: "center",
       width: "100%",
+      marginBottom: "120px",
     },
     questionTwo: {
       fontSize: "40px",
       color: "white",
-      fontStyle: "skoda_bold, sans-serif",
+      fontFamily: "skoda_bold, sans-serif",
       textAlign: "center",
     },
     q1_buttonGroup: {
@@ -83,9 +87,9 @@ function App() {
       display: "flex",
     },
     q2_buttonGroup: {
-      gap: "30px",
-      direction: "vertical",
       display: "flex",
+      gap: "30px",
+      flexDirection: "column",
     },
     q1_button: {
       height: "200px",
@@ -106,28 +110,30 @@ function App() {
       },
     },
     q2_button: {
-      borderColor: "skoda-logo-500",
+      borderColor: added_colors["skoda-light"],
       borderStyle: "solid",
-      padding_y_axis: "30px",
-      padding_x_axis: "110px",
+      padding: "4px 5px",
       borderRadius: "100px",
       borderWidth: "3px",
-      //  backgroundColor: "skoda-dark-500",
+      color: "white",
+      background: "transparent",
+      backdropFilter: "blur(20px)",
       selectedStyle: {
-        borderColor: "skoda-light-500",
+        transform: "scale(1.2)",
+        opacity: 0.85,
+        transition: "transform 0.5s ease-in-out",
+        backgroundColor: "#9AF7B4",
+        color: added_colors["skoda-dark"],
+        borderColor: added_colors["skoda-dark"],
         borderStyle: "solid",
-        padding_y_axis: "30px",
-        padding_x_axis: "110px",
+        padding: "30px 5px",
         borderRadius: "100px",
         borderWidth: "3px",
-        backgroundColor: "skoda-dark-500",
         fontSize: "40px",
-
-        color: "black",
       },
       text: {
         fontSize: "40px",
-        fontStyle: "skoda_bold, sans-serif",
+        fontFamily: "skoda_bold, sans-serif",
       },
     },
     confirmButton: {
@@ -244,30 +250,32 @@ function App() {
           alignItems: "center",
         }}
       >
-        <Flex
-          position="absolute"
-          bottom="8"
-          justifyContent="center"
-          color="var(--skoda-logo-500)"
-          width={"100%"}
-          // mt={4}
-          // ml={4}
-          //p={4}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "50px",
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            width: "100%",
+          }}
         >
-          <Logo></Logo>
-        </Flex>
-        <Box
-          position="absolute"
-          top="0"
-          right="0"
-          color="var(--skoda-logo-400)"
-          //mt={4}
-          // h="20px"
-
+          <Logo
+            color={"#9AF7B4"}
+            styles={{ marginTop: "20px", marginLeft: "20px" }}
+          />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            right: "0",
+            color: "var(--skoda-logo-400)",
+          }}
           onClick={() => restart()}
         >
-          <Restart_symbol></Restart_symbol>
-        </Box>
+          <Restart_symbol />
+        </div>
         {currentQuestion === "questionOne" && (
           <Select_metaphor
             JSON_data={JSON_data}

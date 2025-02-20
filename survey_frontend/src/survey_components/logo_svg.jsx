@@ -1,4 +1,4 @@
-const LogoSvg = () => {
+const LogoSvg = ({ styles, color }) => {
   return (
     <svg
       id="Layer_1"
@@ -7,13 +7,13 @@ const LogoSvg = () => {
       viewBox="0 0 200.94 70.38"
       width="220"
       height="90"
-      style={{ marginTop: "20px", marginLeft: "20px" }}
+      style={{ ...styles }}
     >
       <defs>
         <style>
           {`
             .cls-1 { fill: none; }
-            .cls-2, .cls-3 { fill: #23fda6; }
+            .cls-2, .cls-3 { fill: ${color}; }
             .cls-3 {
               font-family: 'SKODANext-Light', 'SKODANext Light';
               font-size: 22.25px;

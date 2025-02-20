@@ -5,7 +5,7 @@ const Restart_symbol = () => {
       viewBox="-6 5 24 24"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      stroke="#80fcac"
+      stroke="#9AF7B4"
       stroke-width="0.6719999999999999"
       height="70px"
       width="70px"
