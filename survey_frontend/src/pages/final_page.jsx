@@ -48,22 +48,32 @@ function Final({ JSON_data, selectedValue }) {
   };
   return (
     <>
-      <Flex {...flexStyles}>
-        <Text {...questionOneStyle} fontSize="95px">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateRows: "1fr 2fr",
+          height: "80vh",
+          width: "80vw",
+          marginBottom: "60px",
+        }}
+      >
+        <Text {...questionOneStyle} fontSize="200px" width={"100%"}>
           {questionList["FINAL"].question}
         </Text>
         <div
           style={{
-            position: "absolute",
-            left: "2%",
-            bottom: "5%",
-            backgroundImage: `url(${imageMap[selectedValue]})`,
+            backgroundImage: "url(/images/CAR_HERO.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            ...styleMap[selectedValue],
+            //height: "240px",
+            //  width: "460px",
+            width: "100%",
+            flex: "1",
+            //marginTop: "60px",
+            marginLeft: "70px",
           }}
         ></div>
-      </Flex>
+      </div>
     </>
   );
 }

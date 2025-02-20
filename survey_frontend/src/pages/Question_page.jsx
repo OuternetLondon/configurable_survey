@@ -50,6 +50,49 @@ function Question_page({
       submitResponse();
     }, 1500);
   }
+
+  const imageMap = {
+    CHIPMUNK: "/images/CHIPMUNK_HERO_2.png",
+    "SNOW DROP": "/images/FLOWER_HERO.png",
+    CLOUDS: "/images/CLOUD_HERO.png",
+    HUMMINGBIRD: "/images/HUMMINGBIRD_HERO.png",
+    RACOON: "/images/RACCOON_HERO.png",
+  };
+
+  const imageStyles = {
+    CLOUDS: {
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "150px",
+      width: "300px",
+    },
+    HUMMINGBIRD: {
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "170px",
+      width: "250px",
+    },
+
+    "SNOW DROP": {
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "110px",
+      width: "290px",
+    },
+
+    RACOON: {
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "190px",
+      width: "200px",
+    },
+    CHIPMUNK: {
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "170px",
+      width: "250px",
+    },
+  };
   return (
     <>
       <Flex
@@ -62,21 +105,27 @@ function Question_page({
           {questionList[selectedValue].question}
         </Text>
         <div
-          style={{
+          /*  style={{
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
             width: "100%",
+          }}*/
+          style={{
+            display: "grid",
+            //gridTemplateColumns: "1fr 1fr 1fr",
+            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+
+            gridTemplateRows: "1fr ",
+            width: "100%",
+            justifyItems: "center",
+            alignItems: "center",
           }}
         >
           <div
             style={{
-              backgroundImage: "url(/images/RACCOON_HERO.png)",
-              position: "absolute",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "170px",
-              width: "180px",
+              backgroundImage: `url(${imageMap[selectedValue]})`,
+              ...imageStyles[selectedValue],
             }}
           ></div>
           <Flex {...buttonGroupStyle}>
@@ -90,8 +139,7 @@ function Question_page({
                     ? {
                         transform: "scale(1.2)",
                         opacity: 0.85,
-                        transition:
-                          "transform 0.5s ease-in-out, color 0.5s ease-in-out",
+                        transition: "transform 0.5s ease-in-out",
                         backgroundColor: "#80fcac",
                       }
                     : {}),
@@ -103,7 +151,17 @@ function Question_page({
               </Button>
             ))}
           </Flex>
-          <p>image</p>
+          <div
+            style={{
+              backgroundImage: "url(/images/CAR_HERO.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              height: "240px",
+              width: "460px",
+              marginTop: "60px",
+              //  marginLeft: "70px",
+            }}
+          ></div>
         </div>
 
         <Button {...confirmButtonStyle} visibility="hidden">

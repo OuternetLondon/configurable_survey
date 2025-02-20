@@ -62,14 +62,14 @@ function App() {
       image: "/images/skoda_background.png",
     },
     questionOne: {
-      fontSize: "5xl",
+      fontSize: "6xl",
       color: "white",
       fontStyle: "skoda_bold, sans-serif",
       textAlign: "center",
       width: "100%",
     },
     questionTwo: {
-      fontSize: "4xl",
+      fontSize: "40px",
       color: "white",
       fontStyle: "skoda_bold, sans-serif",
       textAlign: "center",
@@ -246,7 +246,7 @@ function App() {
       >
         <Flex
           position="absolute"
-          bottom="12"
+          bottom="8"
           justifyContent="center"
           color="var(--skoda-logo-500)"
           width={"100%"}
