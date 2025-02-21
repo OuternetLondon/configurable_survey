@@ -24,7 +24,7 @@ import Restart_symbol from "@/survey_components/restart_symbol";
 function Final({ JSON_data, selectedValue }) {
   const questionList = JSON_data.questionList;
   let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
-  let questionOneStyle = Loop_JSON({ JSON: JSON_data.questionOne });
+  let questionThreeStyle = JSON_data.questionThree;
   let questionTwoStyle = Loop_JSON({ JSON: JSON_data.questionTwo });
   //let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.buttonGroup });
 
@@ -57,19 +57,15 @@ function Final({ JSON_data, selectedValue }) {
           marginBottom: "60px",
         }}
       >
-        <Text {...questionOneStyle} fontSize="200px" width={"100%"}>
+        <p style={{ ...questionThreeStyle, fontSize: "200px", width: "100%" }}>
           {questionList["FINAL"].question}
-        </Text>
+        </p>
         <div
           style={{
             backgroundImage: "url(/images/CAR_HERO.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            //height: "240px",
-            //  width: "460px",
             width: "100%",
-            flex: "1",
-            //marginTop: "60px",
             marginLeft: "70px",
           }}
         ></div>

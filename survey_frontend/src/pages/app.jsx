@@ -40,22 +40,6 @@ function App() {
     "skoda-dark": "#1B392F",
   };
   const JSON_data = {
-    default_colors: [
-      { color: "gray", hex: "#52525b" },
-      { color: "red", hex: "#ef4444" },
-      { color: "yellow", hex: "#eab308" },
-      { color: "orange", hex: "#f97316" },
-      { color: "green", hex: "#22c55e" },
-      { color: "blue", hex: "#3b82f6" },
-      { color: "teal", hex: "#14b8a6" },
-      { color: "purple", hex: "#a855f7" },
-      { color: "pink", hex: "#ec4899" },
-      { color: "cyan", hex: "#06b6d4" },
-      { color: "white", hex: "#ffffff" },
-      { color: "skoda-light", hex: "#9AF7B4" },
-      { color: "skoda-dark", hex: "#1B392F" },
-      { color: "skoda-logo", hex: "#23fda6" },
-    ],
     mainContainer: {
       height: "100vh",
       width: "100vw",
@@ -74,6 +58,11 @@ function App() {
     },
     questionTwo: {
       fontSize: "40px",
+      color: "white",
+      fontFamily: "skoda_bold, sans-serif",
+      textAlign: "center",
+    },
+    questionThree: {
       color: "white",
       fontFamily: "skoda_bold, sans-serif",
       textAlign: "center",
@@ -112,12 +101,14 @@ function App() {
     q2_button: {
       borderColor: added_colors["skoda-light"],
       borderStyle: "solid",
-      padding: "4px 5px",
+      padding: "4px 110px",
+      maxWidth: "500px",
       borderRadius: "100px",
       borderWidth: "3px",
       color: "white",
       background: "transparent",
       backdropFilter: "blur(20px)",
+      //  lineHeight: "1.1",
       selectedStyle: {
         transform: "scale(1.2)",
         opacity: 0.85,
@@ -126,7 +117,7 @@ function App() {
         color: added_colors["skoda-dark"],
         borderColor: added_colors["skoda-dark"],
         borderStyle: "solid",
-        padding: "30px 5px",
+        padding: "4px 110px",
         borderRadius: "100px",
         borderWidth: "3px",
         fontSize: "40px",
@@ -192,7 +183,6 @@ function App() {
       },
     },
   };
-  useSetDefaultStyles(JSON_data);
 
   const sendData = async (selection) => {
     const response = await fetch(
@@ -268,8 +258,8 @@ function App() {
         <div
           style={{
             position: "absolute",
-            top: "0",
-            right: "0",
+            top: "0px",
+            right: "0px",
             color: "var(--skoda-logo-400)",
           }}
           onClick={() => restart()}

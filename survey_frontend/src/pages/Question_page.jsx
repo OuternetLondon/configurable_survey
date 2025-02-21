@@ -91,6 +91,16 @@ function Question_page({
     },
   };
 
+  let largeStyle = {};
+  questionList[selectedValue].answers.forEach((answer) => {
+    if (answer.length >= 13) {
+      largeStyle = {
+        padding: "12px 40px",
+        lineHeight: "1.2",
+      };
+    }
+  });
+
   return (
     <>
       <div
@@ -136,8 +146,8 @@ function Question_page({
                 key={answer}
                 style={{
                   //maxWidth: "100%",
-                  maxWidth: "470px",
-                  minWidth: "430px",
+                  //maxWidth: "470px",
+                  // minWidth: "430px",
                   //minWidth: "80%",
                   /* whiteSpace: "normal",
                   wordWrap: "break-word",
@@ -154,7 +164,9 @@ function Question_page({
                         color: "#1B392F",
                       }
                     : {}),*/
+
                   ...(clickedButton === answer ? buttonClick : buttonStyle),
+                  ...largeStyle,
                 }}
                 onClick={() => clickButton(answer)}
               >
@@ -176,8 +188,8 @@ function Question_page({
               backgroundImage: "url(/images/CAR_HERO.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              height: "240px",
-              width: "460px",
+              height: "210px",
+              width: "420px",
               marginTop: "60px",
               marginLeft: "50px",
               //  marginLeft: "70px",
