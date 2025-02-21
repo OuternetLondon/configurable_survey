@@ -96,7 +96,7 @@ function Question_page({
     if (answer.length >= 13) {
       largeStyle = {
         padding: "12px 40px",
-        lineHeight: "1.2",
+        //lineHeight: "1.2",
       };
     }
   });
