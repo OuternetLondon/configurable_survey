@@ -91,7 +91,7 @@ function Question_page({
     },
   };
 
-  let largeStyle = {};
+  /*let largeStyle = {};
   questionList[selectedValue].answers.forEach((answer) => {
     if (answer.length >= 18) {
       largeStyle = {
@@ -99,7 +99,7 @@ function Question_page({
         lineHeight: "1.2",
       };
     }
-  });
+  });*/
 
   return (
     <>
@@ -166,7 +166,6 @@ function Question_page({
                     : {}),*/
 
                   ...(clickedButton === answer ? buttonClick : buttonStyle),
-                  ...largeStyle,
                 }}
                 onClick={() => clickButton(answer)}
               >
