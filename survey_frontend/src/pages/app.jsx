@@ -101,8 +101,9 @@ function App() {
     q2_button: {
       borderColor: added_colors["skoda-light"],
       borderStyle: "solid",
-      padding: "4px 110px",
-      maxWidth: "500px",
+      padding: "4px 40px",
+      maxWidth: "600px",
+      minWidth: "350px",
       borderRadius: "100px",
       borderWidth: "3px",
       color: "white",
@@ -172,9 +173,9 @@ function App() {
       HUMMINGBIRD: {
         question: "Hummingbird question",
         answers: [
-          "Hummingbird answer 1",
-          "Hummingbird answer 2",
-          "Hummingbird answer 3",
+          "Hummingbird Answer 1",
+          "Hummingbird Answer 2",
+          "Hummingbird Answer 3",
         ],
       },
       FINAL: {

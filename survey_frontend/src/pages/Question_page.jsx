@@ -93,10 +93,10 @@ function Question_page({
 
   let largeStyle = {};
   questionList[selectedValue].answers.forEach((answer) => {
-    if (answer.length >= 13) {
+    if (answer.length >= 18) {
       largeStyle = {
-        padding: "12px 40px",
-        //lineHeight: "1.2",
+        //    padding: "12px 40px",
+        lineHeight: "1.2",
       };
     }
   });
