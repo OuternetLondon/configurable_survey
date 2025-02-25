@@ -102,7 +102,7 @@ function App() {
       borderColor: added_colors["skoda-light"],
       borderStyle: "solid",
       padding: "10px 40px",
-      maxWidth: "600px",
+      maxWidth: "500px",
       minWidth: "350px",
       borderRadius: "100px",
       borderWidth: "3px",
