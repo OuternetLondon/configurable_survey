@@ -18,7 +18,7 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
   const [finalAnswer, setFinalAnswer] = useState(false);
 
-  //useMobileFriendly();
+  useMobileFriendly();
   console.log("selectedValue", selectedValue);
   console.log("currentQuestion", currentQuestion);
   let added_colors = {
