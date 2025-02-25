@@ -1,25 +1,12 @@
-import {
-  Button,
-  HStack,
-  VStack,
-  Stack,
-  Input,
-  ButtonGroup,
-  Center,
-  Flex,
-  Box,
-  Text,
-} from "@chakra-ui/react";
-import Loop_JSON from "@/survey_components/loop_JSON";
+import Loop_JSON from "../survey_components/loop_JSON";
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
 import { Children, use } from "react";
 import "../index.css";
 import { useState } from "react";
-import Loop_components from "@/survey_components/loop_components";
 import { FaFontAwesome } from "react-icons/fa";
 import Logo from "../survey_components/logo_svg";
-import Restart_symbol from "@/survey_components/restart_symbol";
+import Restart_symbol from "../survey_components/restart_symbol";
 
 function Final({ JSON_data, selectedValue }) {
   const questionList = JSON_data.questionList;
@@ -57,7 +44,15 @@ function Final({ JSON_data, selectedValue }) {
           marginBottom: "60px",
         }}
       >
-        <p style={{ ...questionThreeStyle, fontSize: "200px", width: "100%" }}>
+        <p
+          style={{
+            ...questionThreeStyle,
+            margin: "0px",
+            padding: "0px",
+            fontSize: "200px",
+            width: "100%",
+          }}
+        >
           {questionList["FINAL"].question}
         </p>
         <div
@@ -65,8 +60,9 @@ function Final({ JSON_data, selectedValue }) {
             backgroundImage: "url(/images/CAR_HERO.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            height: "95%",
             width: "100%",
-            marginLeft: "70px",
+            marginLeft: "75px",
           }}
         ></div>
       </div>

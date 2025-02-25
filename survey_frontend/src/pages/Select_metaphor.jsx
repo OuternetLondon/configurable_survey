@@ -1,19 +1,6 @@
-import {
-  Button,
-  HStack,
-  VStack,
-  Stack,
-  Input,
-  ButtonGroup,
-  Center,
-  Flex,
-  Box,
-  Text,
-} from "@chakra-ui/react";
-import Loop_JSON from "@/survey_components/loop_JSON";
+import Loop_JSON from "../survey_components/loop_JSON";
 import "../index.css";
 import { useState } from "react";
-import Loop_components from "@/survey_components/loop_components";
 
 function Select_metaphor({
   JSON_data,

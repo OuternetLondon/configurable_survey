@@ -1,5 +1,3 @@
-import { chakra } from "@chakra-ui/react";
-
 function Loop_JSON({ JSON }) {
   let chakra_object = {};
 

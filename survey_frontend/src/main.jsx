@@ -1,6 +1,5 @@
 import "./index.css";
 import Select_metaphor from "./pages/Select_metaphor.jsx";
-import { Provider } from "@/components/ui/provider";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -19,9 +18,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider>
-      {" "}
-      <RouterProvider router={router}></RouterProvider>
-    </Provider>
+    {" "}
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
 );

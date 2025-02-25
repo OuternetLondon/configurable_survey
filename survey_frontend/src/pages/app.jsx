@@ -1,26 +1,12 @@
-import {
-  Button,
-  HStack,
-  VStack,
-  Stack,
-  Input,
-  ButtonGroup,
-  Center,
-  Flex,
-  Box,
-  Text,
-  Select,
-} from "@chakra-ui/react";
-import Loop_JSON from "@/survey_components/loop_JSON";
+import Loop_JSON from "../survey_components/loop_JSON";
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
-import useMobileFriendly from "@/hooks/useMobileFriendly";
+import useMobileFriendly from "../hooks/useMobileFriendly";
 import { Children, use } from "react";
 import "../index.css";
 import { useState } from "react";
-import Loop_components from "@/survey_components/loop_components";
 import Logo from "../survey_components/logo_svg";
-import Restart_symbol from "@/survey_components/restart_symbol";
+import Restart_symbol from "../survey_components/restart_symbol";
 import Select_metaphor from "./Select_metaphor";
 import Question_page from "./Question_page";
 import Final from "./final_page";
@@ -129,6 +115,8 @@ function App() {
       text: {
         fontSize: "40px",
         fontFamily: "skoda_bold, sans-serif",
+        padding: "0px",
+        margin: "0px",
       },
     },
     confirmButton: {
