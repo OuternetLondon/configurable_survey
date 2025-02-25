@@ -89,7 +89,7 @@ function App() {
       borderStyle: "solid",
       padding: "10px 40px",
       maxWidth: "500px",
-      minWidth: "350px",
+      minWidth: "380px",
       borderRadius: "100px",
       borderWidth: "3px",
       color: "white",
