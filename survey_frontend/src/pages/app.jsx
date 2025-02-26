@@ -1,8 +1,7 @@
-import Loop_JSON from "../survey_components/loop_JSON";
 import chroma from "chroma-js";
 import useSetDefaultStyles from "../hooks/useSetDefaultStyles";
 import useMobileFriendly from "../hooks/useMobileFriendly";
-import { Children, use } from "react";
+import { Children, use, useEffect, useRef } from "react";
 import "../index.css";
 import { useState } from "react";
 import Logo from "../survey_components/logo_svg";
@@ -10,6 +9,7 @@ import Restart_symbol from "../survey_components/restart_symbol";
 import Select_metaphor from "./Select_metaphor";
 import Question_page from "./Question_page";
 import Final from "./final_page";
+import { CSSTransition } from "react-transition-group";
 
 function App() {
   const [selectedValue, setSelectedValue] = useState("");
@@ -18,7 +18,12 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
   const [finalAnswer, setFinalAnswer] = useState(false);
 
-  useMobileFriendly();
+  const [isVisible, setIsVisible] = useState(false);
+  const nodeRefOne = useRef(null);
+  const nodeRefTwo = useRef(null);
+  const nodeRefThree = useRef(null);
+
+  //useMobileFriendly();
   console.log("selectedValue", selectedValue);
   console.log("currentQuestion", currentQuestion);
   let added_colors = {
@@ -32,7 +37,7 @@ function App() {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      image: "/images/skoda_background.png",
+      image: "/images/BACKGROUND_SKODA_2.png",
     },
     questionOne: {
       fontSize: "60px",
@@ -99,7 +104,7 @@ function App() {
       selectedStyle: {
         transform: "scale(1.2)",
         opacity: 0.85,
-        transition: "transform 0.5s ease-in-out",
+        transition: "transform 0.3s ease-out",
         backgroundColor: "#9AF7B4",
         color: added_colors["skoda-dark"],
         borderColor: added_colors["skoda-dark"],
@@ -192,9 +197,13 @@ function App() {
   };
 
   const metaphorResponse = new Map();
-  for (let i = 0; i < JSON_data.questionList.questionOne.answers.length; i++) {
+  for (
+    let i = 0;
+    i < (JSON_data.questionList.questionOne?.answers?.length ?? 0);
+    i++
+  ) {
     metaphorResponse.set(
-      JSON_data.questionList.questionOne.answers[i],
+      JSON_data.questionList.questionOne?.answers[i],
       JSON_data.questionList.questionOne.values[i]
     );
   }
@@ -203,26 +212,27 @@ function App() {
     if (metaphorResponse.has(selectedValue)) {
       sendData(metaphorResponse.get(selectedValue));
       setCurrentQuestion("FINAL");
-      // setValueSelected(false);
+
       return;
     }
   }
 
   function restart() {
-    setCurrentQuestion("questionOne");
-    setSelectedValue("");
-    setClickedButton("");
-    // setValueSelected("");
-    setFinalAnswer(false);
+    setCurrentQuestion("transition");
+    setTimeout(() => {
+      setCurrentQuestion("questionOne");
+      setSelectedValue("");
+      setClickedButton("");
+      // setValueSelected("");
+      setFinalAnswer(false);
+    }, 350);
   }
-
-  let mainContainer = Loop_JSON({ JSON: JSON_data.mainContainer });
 
   return (
     <>
       <div
         style={{
-          backgroundImage: `url(/images/skoda_background.png)`,
+          backgroundImage: `url(/images/BACKGROUND_SKODA_2.png)`,
           height: "100vh",
           width: "100vw",
           backgroundSize: "cover",
@@ -258,8 +268,16 @@ function App() {
         >
           <Restart_symbol />
         </div>
-        {currentQuestion === "questionOne" && (
+        <CSSTransition
+          in={currentQuestion === "questionOne"}
+          timeout={350}
+          classNames="fade"
+          unmountOnExit
+          nodeRef={nodeRefOne}
+        >
           <Select_metaphor
+            ref={nodeRefOne}
+            nodeRefOne={nodeRefOne}
             JSON_data={JSON_data}
             currentQuestion={currentQuestion}
             selectedValue={selectedValue}
@@ -269,25 +287,43 @@ function App() {
             clickedButton={clickedButton}
             setClickedButton={setClickedButton}
           ></Select_metaphor>
-        )}
-        {currentQuestion !== "questionOne" && currentQuestion !== "FINAL" && (
+        </CSSTransition>
+        <CSSTransition
+          in={currentQuestion === "questionTwo"}
+          timeout={350}
+          classNames="fade"
+          unmountOnExit
+          nodeRef={nodeRefTwo}
+        >
           <Question_page
+            ref={nodeRefTwo}
+            nodeRefTwo={nodeRefTwo}
             JSON_data={JSON_data}
             currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
             selectedValue={selectedValue}
             submitResponse={submitResponse}
             clickedButton={clickedButton}
             setClickedButton={setClickedButton}
           ></Question_page>
-        )}
-        {currentQuestion === "FINAL" && (
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentQuestion === "FINAL"}
+          timeout={350}
+          classNames="fade"
+          unmountOnExit
+          nodeRef={nodeRefThree}
+        >
           <Final
+            ref={nodeRefThree}
+            nodeRefThree={nodeRefThree}
             JSON_data={JSON_data}
             currentQuestion={currentQuestion}
             selectedValue={selectedValue}
             submitResponse={submitResponse}
           ></Final>
-        )}
+        </CSSTransition>
       </div>
     </>
   );

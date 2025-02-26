@@ -8,7 +8,7 @@ import { FaFontAwesome } from "react-icons/fa";
 import Logo from "../survey_components/logo_svg";
 import Restart_symbol from "../survey_components/restart_symbol";
 
-function Final({ JSON_data, selectedValue }) {
+function Final({ JSON_data, selectedValue, nodeRefThree }) {
   const questionList = JSON_data.questionList;
   let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
   let questionThreeStyle = JSON_data.questionThree;
@@ -18,13 +18,13 @@ function Final({ JSON_data, selectedValue }) {
   let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
   let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
 
-  const imageMap = {
-    CHIPMUNK: "/images/CHIPMUNK_HERO_2.png",
+  /*const imageMap = {
+    CHIPMUNK: "/images/CHIPMUNK_HERO.png",
     "SNOW DROP": "/images/FLOWER_HERO.png",
-    CLOUDS: "/images/CLOUD_HERO_2.png",
+    CLOUDS: "/images/CLOUD.png",
     HUMMINGBIRD: "/images/HUMMINGBIRD_02.png",
     RACOON: "/images/RACCOON_HERO.png",
-  };
+  };*/
 
   const styleMap = {
     CHIPMUNK: { height: "45%", width: "650px" },
@@ -36,6 +36,7 @@ function Final({ JSON_data, selectedValue }) {
   return (
     <>
       <div
+        ref={nodeRefThree}
         style={{
           display: "grid",
           gridTemplateRows: "1fr 2fr",
@@ -53,7 +54,7 @@ function Final({ JSON_data, selectedValue }) {
             width: "100%",
           }}
         >
-          {questionList["FINAL"].question}
+          {questionList["FINAL"]?.question}
         </p>
         <div
           style={{

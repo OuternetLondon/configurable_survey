@@ -7,6 +7,8 @@ body {
   overflow: hidden;
   height: 100%;
   width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
   touch-action: none; /* Disable gestures */
   user-select: none; /* Prevent text selection */
   -webkit-user-drag: none; /* Prevent dragging */
@@ -143,4 +145,35 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  text-align: center;
+  line-height: 100px;
+  margin-top: 20px;
+}
+
+/* Enter Animation */
+.fade-enter {
+  opacity: 0;
+  /*transform: scale(0.9);
+   height: 50px;
+  width: 50px;*/
+}
+.fade-enter-active {
+  opacity: 1;
+  /*transform: scale(1);*/
+  transition: opacity 350ms ease-in;
+}
+
+/* Exit Animation */
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 350ms ease-out;
 }

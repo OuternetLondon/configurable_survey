@@ -8,18 +8,21 @@ function Select_metaphor({
   setCurrentQuestion,
   clickedButton,
   setClickedButton,
+  nodeRefOne,
 }) {
   const questionList = JSON_data.questionList;
   let questionOneStyle = JSON_data.questionOne;
 
   function clickButton(answer) {
     setClickedButton(answer);
-
     setTimeout(() => {
-      setSelectedValue(answer);
-      setClickedButton("");
-      setCurrentQuestion("questionTwo");
-    }, 1500);
+      setCurrentQuestion("transition");
+      setTimeout(() => {
+        setSelectedValue(answer);
+        //  setClickedButton("");
+        setCurrentQuestion("questionTwo");
+      }, 351);
+    }, 200);
 
     console.log(answer);
   }
@@ -30,9 +33,9 @@ function Select_metaphor({
   }
 
   const imageMap = {
-    CHIPMUNK: "/images/CHIPMUNK_HERO_2.png",
-    "SNOW DROP": "/images/FLOWER_HERO.png",
-    CLOUDS: "/images/CLOUD_HERO.png",
+    CHIPMUNK: "/images/CHIPMUNK_HERO.png",
+    "SNOW DROP": "/images/FLOWER_HERO_WITH_SNOW.png",
+    CLOUDS: "/images/CLOUD.png",
     HUMMINGBIRD: "/images/HUMMINGBIRD_HERO.png",
     RACOON: "/images/RACCOON_HERO.png",
   };
@@ -40,52 +43,62 @@ function Select_metaphor({
   const imageStyles = {
     CLOUDS: {
       position: "absolute",
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "150px",
-      width: "300px",
-      top: "13%",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "17vw",
+      width: "17vw",
+      top: "8%",
       left: "35%",
       transform: `translateX(-50%)`,
     },
     HUMMINGBIRD: {
       position: "absolute",
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "170px",
-      width: "250px",
-      top: "11%",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "17vw",
+      width: "17vw",
+      top: "10%",
       right: "20%",
       transform: `translateX(-50%)`,
     },
 
     "SNOW DROP": {
       position: "absolute",
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "110px",
-      width: "290px",
-      bottom: "38%",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "17vw",
+      width: "17vw",
+      bottom: "34%",
       right: "7%",
       transform: `translateX(-50%)`,
     },
 
     RACOON: {
       position: "absolute",
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "170px",
-      width: "180px",
-      bottom: "38%",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "17vw",
+      width: "17vw",
+      bottom: "33%",
       left: "25%",
       transform: `translateX(-50%)`,
     },
     CHIPMUNK: {
       position: "absolute",
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "170px",
-      width: "250px",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "17vw",
+      width: "17vw",
       bottom: "20%",
       left: "50%",
       transform: `translateX(-50%)`,
@@ -95,6 +108,7 @@ function Select_metaphor({
   return (
     <>
       <div
+        ref={nodeRefOne}
         style={{
           position: "relative",
           width: `100%`,
@@ -105,9 +119,9 @@ function Select_metaphor({
         }}
       >
         <p style={{ ...questionOneStyle }}>
-          {questionList["questionOne"].question}
+          {questionList["questionOne"]?.question}
         </p>
-        {questionList["questionOne"].answers.map((answer) => (
+        {questionList["questionOne"]?.answers.map((answer) => (
           <div
             key={answer}
             style={{
@@ -117,11 +131,11 @@ function Select_metaphor({
               ...imageStyles[answer],
               ...(clickedButton === answer
                 ? {
-                    transform: "scale(1.5) translate(-30%, -10%)",
+                    transform: "scale(1.25) translate(-40%, -0%)",
                     opacity: 0.85,
                   }
                 : {}),
-              transition: "transform 0.5s ease-in-out",
+              transition: "transform 0.3s ease-out",
             }}
             onClick={() => clickButton(answer)}
           ></div>

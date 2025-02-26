@@ -12,11 +12,12 @@ import Restart_symbol from "../survey_components/restart_symbol";
 function Question_page({
   JSON_data,
   currentQuestion,
-  selectedValue,
   setCurrentQuestion,
+  selectedValue,
   submitResponse,
   clickedButton,
   setClickedButton,
+  nodeRefTwo,
 }) {
   const questionList = JSON_data.questionList;
   let flexStyles = JSON_data.mainContainer;
@@ -30,51 +31,63 @@ function Question_page({
     setClickedButton(answer);
 
     setTimeout(() => {
-      setClickedButton("");
-      submitResponse();
-    }, 1500);
+      setCurrentQuestion("transition");
+      setTimeout(() => {
+        submitResponse();
+      }, 351);
+    }, 200);
   }
 
   const imageMap = {
-    CHIPMUNK: "/images/CHIPMUNK_HERO_2.png",
-    "SNOW DROP": "/images/FLOWER_HERO.png",
-    CLOUDS: "/images/CLOUD_HERO.png",
+    CHIPMUNK: "/images/CHIPMUNK_HERO.png",
+    "SNOW DROP": "/images/FLOWER_HERO_WITH_SNOW.png",
+    CLOUDS: "/images/CLOUD.png",
     HUMMINGBIRD: "/images/HUMMINGBIRD_HERO.png",
     RACOON: "/images/RACCOON_HERO.png",
   };
 
   const imageStyles = {
     CLOUDS: {
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "150px",
-      width: "300px",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "22vw",
+      width: "22vw",
     },
     HUMMINGBIRD: {
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "170px",
-      width: "250px",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "22vw",
+      width: "22vw",
     },
 
     "SNOW DROP": {
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "110px",
-      width: "290px",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "22vw",
+      width: "22vw",
     },
 
     RACOON: {
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "190px",
-      width: "200px",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "22vw",
+      width: "22vw",
     },
     CHIPMUNK: {
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
-      height: "170px",
-      width: "250px",
+      backgroundRepeat: "no-repeat",
+      //contain= dont need to specify height and width seperate
+      height: "22vw",
+      width: "22vw",
     },
   };
 
@@ -91,6 +104,7 @@ function Question_page({
   return (
     <>
       <div
+        ref={nodeRefTwo}
         style={{
           ...flexStyles,
           justifyContent: "space-evenly",
@@ -101,7 +115,7 @@ function Question_page({
         }}
       >
         <p style={{ ...questionTwoStyle }}>
-          {questionList[selectedValue].question}
+          {questionList[selectedValue]?.question}
         </p>
         <div
           /*  style={{
@@ -128,7 +142,7 @@ function Question_page({
             }}
           ></div>
           <div style={{ ...buttonGroupStyle }}>
-            {questionList[selectedValue].answers.map((answer) => (
+            {questionList[selectedValue]?.answers?.map((answer) => (
               <button
                 key={answer}
                 style={{
@@ -184,7 +198,7 @@ function Question_page({
         </div>
 
         <p style={{ ...questionTwoStyle, visibility: "hidden" }}>
-          {questionList[selectedValue].question}
+          {questionList[selectedValue]?.question}
         </p>
       </div>
     </>
