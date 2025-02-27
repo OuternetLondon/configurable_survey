@@ -16,16 +16,19 @@ function App() {
   const [clickedButton, setClickedButton] = useState("");
 
   const [currentQuestion, setCurrentQuestion] = useState("questionOne");
-  const [finalAnswer, setFinalAnswer] = useState(false);
 
-  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    console.log("selectedValue", selectedValue);
+    console.log("clickedButton", clickedButton);
+    console.log("currentQuestion", currentQuestion);
+  }, [selectedValue, clickedButton, currentQuestion]);
+
   const nodeRefOne = useRef(null);
   const nodeRefTwo = useRef(null);
   const nodeRefThree = useRef(null);
 
   //useMobileFriendly();
-  console.log("selectedValue", selectedValue);
-  console.log("currentQuestion", currentQuestion);
+
   let added_colors = {
     "skoda-light": "#9AF7B4",
     "skoda-dark": "#1B392F",
@@ -37,7 +40,7 @@ function App() {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      image: "/images/BACKGROUND_SKODA_2.png",
+      image: "/images/BACKGROUND_SKODA_3.png",
     },
     questionOne: {
       fontSize: "60px",
@@ -143,36 +146,24 @@ function App() {
         values: ["Chipmunk", "Racoon", "Clouds", "SnowDrop", "Hummingbird"],
       },
       CHIPMUNK: {
-        question: "Chipmunk question",
-        answers: [
-          "Chipmunk answer 1",
-          "Chipmunk answer 2",
-          "Chipmunk answer 3",
-        ],
+        question: "What is the link between a Chipmunk and a Skoda Elroq?",
+        answers: ["Teeth", "Cheeks", "Speed", "Paws"],
       },
       RACOON: {
         question: "What is the link between a Racoon and a Skoda Elroq?",
         answers: ["Fur", "Storage", "Sight", "Tail"],
       },
       CLOUDS: {
-        question: "Clouds question",
-        answers: ["Clouds answer 1", "Clouds answer 2", "Clouds answer 3"],
+        question: "What is the link between a Cloud and a Skoda Elroq?",
+        answers: ["Wetness", "Weight", "Height", "Inspiration"],
       },
       "SNOW DROP": {
-        question: "Snow Drop question",
-        answers: [
-          "Snow Drop answer 1",
-          "Snow Drop answer 2",
-          "Snow Drop answer 3",
-        ],
+        question: "What is the link between a Snow Drop and a Skoda Elroq?",
+        answers: ["Pollen", "Petals", "Speed", "Roots"],
       },
       HUMMINGBIRD: {
-        question: "Hummingbird question",
-        answers: [
-          "Hummingbird Answer 1",
-          "Hummingbird Answer 2",
-          "Hummingbird Answer 3",
-        ],
+        question: "What is the link between a Hummingbird and a Skoda Elroq?",
+        answers: ["Speed", "Beak", "Feathers"],
       },
       FINAL: {
         question: "Look up!",
@@ -181,9 +172,17 @@ function App() {
     },
   };
 
+  const metaphorValues = {};
+
+  JSON_data.questionList.questionOne?.answers.forEach((answer, index) => {
+    metaphorValues[answer] = JSON_data.questionList.questionOne?.values[index];
+  });
+
+  console.log("metaphorValues", metaphorValues);
+
   const sendData = async (selection) => {
     const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/survey_data`,
+      `http://${document.location.host}/survey_data`,
       {
         method: "POST",
         headers: {
@@ -196,21 +195,9 @@ function App() {
     console.log("result", result);
   };
 
-  const metaphorResponse = new Map();
-  for (
-    let i = 0;
-    i < (JSON_data.questionList.questionOne?.answers?.length ?? 0);
-    i++
-  ) {
-    metaphorResponse.set(
-      JSON_data.questionList.questionOne?.answers[i],
-      JSON_data.questionList.questionOne.values[i]
-    );
-  }
-
   function submitResponse() {
-    if (metaphorResponse.has(selectedValue)) {
-      sendData(metaphorResponse.get(selectedValue));
+    if (metaphorValues.hasOwnProperty(selectedValue)) {
+      sendData(metaphorValues[selectedValue]);
       setCurrentQuestion("FINAL");
 
       return;
@@ -223,8 +210,6 @@ function App() {
       setCurrentQuestion("questionOne");
       setSelectedValue("");
       setClickedButton("");
-      // setValueSelected("");
-      setFinalAnswer(false);
     }, 350);
   }
 
@@ -232,7 +217,7 @@ function App() {
     <>
       <div
         style={{
-          backgroundImage: `url(/images/BACKGROUND_SKODA_2.png)`,
+          backgroundImage: `url(/images/BACKGROUND_SKODA_3.png)`,
           height: "100vh",
           width: "100vw",
           backgroundSize: "cover",
@@ -245,7 +230,7 @@ function App() {
         <div
           style={{
             position: "absolute",
-            bottom: "50px",
+            bottom: "2%",
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
@@ -253,16 +238,15 @@ function App() {
           }}
         >
           <Logo
-            color={"#9AF7B4"}
+            color={added_colors["skoda-light"]}
             styles={{ marginTop: "20px", marginLeft: "20px" }}
           />
         </div>
         <div
           style={{
             position: "absolute",
-            top: "0px",
+            bottom: "2%",
             right: "0px",
-            color: "var(--skoda-logo-400)",
           }}
           onClick={() => restart()}
         >

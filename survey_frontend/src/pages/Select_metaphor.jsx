@@ -11,7 +11,7 @@ function Select_metaphor({
   nodeRefOne,
 }) {
   const questionList = JSON_data.questionList;
-  let questionOneStyle = JSON_data.questionOne;
+  // let questionOneStyle = JSON_data.questionOne;
 
   function clickButton(answer) {
     setClickedButton(answer);
@@ -24,7 +24,7 @@ function Select_metaphor({
       }, 351);
     }, 200);
 
-    console.log(answer);
+    //  console.log(answer);
   }
 
   function submit() {
@@ -34,96 +34,55 @@ function Select_metaphor({
 
   const imageMap = {
     CHIPMUNK: "/images/CHIPMUNK_HERO.png",
-    "SNOW DROP": "/images/FLOWER_HERO_WITH_SNOW.png",
+    "SNOW DROP": "/images/FLOWER_HERO_UPDATED.png",
     CLOUDS: "/images/CLOUD.png",
-    HUMMINGBIRD: "/images/HUMMINGBIRD_HERO.png",
+    HUMMINGBIRD: "/images/HUMMINGBIRD_HERO_TEST2.png",
     RACOON: "/images/RACCOON_HERO.png",
   };
 
   const imageStyles = {
     CLOUDS: {
-      position: "absolute",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "17vw",
-      width: "17vw",
-      top: "8%",
+      height: "20vw",
+      width: "20vw",
+      top: "6%",
       left: "35%",
-      transform: `translateX(-50%)`,
     },
     HUMMINGBIRD: {
-      position: "absolute",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "17vw",
-      width: "17vw",
-      top: "10%",
-      right: "20%",
-      transform: `translateX(-50%)`,
+      height: "19vw",
+      width: "19vw",
+      top: "7%",
+      right: "16.5%",
     },
 
     "SNOW DROP": {
-      position: "absolute",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "17vw",
-      width: "17vw",
-      bottom: "34%",
-      right: "7%",
-      transform: `translateX(-50%)`,
+      height: "19vw",
+      width: "19vw",
+      bottom: "30%",
+      right: "5%",
     },
 
     RACOON: {
-      position: "absolute",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
       height: "17vw",
       width: "17vw",
-      bottom: "33%",
-      left: "25%",
-      transform: `translateX(-50%)`,
+      bottom: "34%",
+      left: "24%",
     },
     CHIPMUNK: {
-      position: "absolute",
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
       height: "17vw",
       width: "17vw",
-      bottom: "20%",
+      bottom: "18%",
       left: "50%",
-      transform: `translateX(-50%)`,
     },
   };
 
   return (
     <>
-      <div
-        ref={nodeRefOne}
-        style={{
-          position: "relative",
-          width: `100%`,
-          height: `100%`,
-          display: `flex`,
-          justifyContent: `center`,
-          alignItems: `center`,
-        }}
-      >
-        <p style={{ ...questionOneStyle }}>
-          {questionList["questionOne"]?.question}
-        </p>
+      <div ref={nodeRefOne} className="metaphor_container">
+        <p className="metaphor_text">{questionList["questionOne"]?.question}</p>
         {questionList["questionOne"]?.answers.map((answer) => (
           <div
             key={answer}
+            className="metaphor_images"
             style={{
               backgroundImage: imageMap[answer]
                 ? `url(${imageMap[answer]})`
@@ -135,7 +94,6 @@ function Select_metaphor({
                     opacity: 0.85,
                   }
                 : {}),
-              transition: "transform 0.3s ease-out",
             }}
             onClick={() => clickButton(answer)}
           ></div>

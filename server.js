@@ -6,7 +6,7 @@ const { Server } = require("socket.io");
 const OSC = require("osc");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "./survey_frontend/dist")));
@@ -48,18 +48,31 @@ function sendOSC(address, ...args) {
   oscPort.send(msg);
 }
 
+const metaphorCounter = {
+  Chipmunk: 0,
+  Racoon: 0,
+  Clouds: 0,
+  SnowDrop: 0,
+  Hummingbird: 0,
+};
+
 app.post("/survey_data", (req, res) => {
   console.log("survey recieved", req.body.selection);
 
   jsonData = req.body.selection;
+  console.log("jsoncounter", metaphorCounter[jsonData]);
+  if (metaphorCounter.hasOwnProperty(jsonData)) {
+    console.log("metaphorCounter[jsonData]", metaphorCounter[jsonData]);
+    metaphorCounter[jsonData] += 1;
+  }
 
   const address = "/skoda";
 
   // 2) Pass the entire JSON as a single argument (stringified)
-  const entirePayload = jsonData;
+  //const entirePayload = jsonData;
 
   // 3) Send the OSC message
-  sendOSC(address, entirePayload);
+  sendOSC(address, jsonData, JSON.stringify(metaphorCounter));
 
   //io.emit("survey_data", req.body.selection);
 });

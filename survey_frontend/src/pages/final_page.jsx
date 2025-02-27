@@ -7,17 +7,14 @@ import { useState } from "react";
 import { FaFontAwesome } from "react-icons/fa";
 import Logo from "../survey_components/logo_svg";
 import Restart_symbol from "../survey_components/restart_symbol";
-
 function Final({ JSON_data, selectedValue, nodeRefThree }) {
   const questionList = JSON_data.questionList;
   let flexStyles = Loop_JSON({ JSON: JSON_data.mainContainer });
   let questionThreeStyle = JSON_data.questionThree;
   let questionTwoStyle = Loop_JSON({ JSON: JSON_data.questionTwo });
   //let buttonGroupStyle = Loop_JSON({ JSON: JSON_data.buttonGroup });
-
   let confirmButtonStyle = Loop_JSON({ JSON: JSON_data.confirmButton });
   let confirmText = Loop_JSON({ JSON: JSON_data.confirmButton.text });
-
   /*const imageMap = {
     CHIPMUNK: "/images/CHIPMUNK_HERO.png",
     "SNOW DROP": "/images/FLOWER_HERO.png",
@@ -25,7 +22,6 @@ function Final({ JSON_data, selectedValue, nodeRefThree }) {
     HUMMINGBIRD: "/images/HUMMINGBIRD_02.png",
     RACOON: "/images/RACCOON_HERO.png",
   };*/
-
   const styleMap = {
     CHIPMUNK: { height: "45%", width: "650px" },
     "SNOW DROP": { height: "500px", width: "390px", left: "5%", bottom: "5%" },
@@ -41,34 +37,50 @@ function Final({ JSON_data, selectedValue, nodeRefThree }) {
           display: "grid",
           gridTemplateRows: "1fr 2fr",
           height: "80vh",
-          width: "80vw",
+          width: "90vw",
           marginBottom: "60px",
         }}
       >
-        <p
-          style={{
-            ...questionThreeStyle,
-            margin: "0px",
-            padding: "0px",
-            fontSize: "200px",
-            width: "100%",
-          }}
-        >
-          {questionList["FINAL"]?.question}
-        </p>
         <div
           style={{
-            backgroundImage: "url(/images/CAR_HERO.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            height: "95%",
-            width: "100%",
-            marginLeft: "75px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
           }}
-        ></div>
+        >
+          <p
+            style={{
+              ...questionThreeStyle,
+              margin: "0px",
+              padding: "0px",
+              fontSize: "14vw",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {questionList["FINAL"]?.question}
+          </p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              backgroundImage:
+                "url(/images/CAR_HERO_UPDATED_SHADOW_RESIZE3.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              height: "94%",
+              width: "80%",
+              marginRight: "2%",
+            }}
+          ></div>
+        </div>
       </div>
     </>
   );
 }
-
 export default Final;

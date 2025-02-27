@@ -40,9 +40,9 @@ function Question_page({
 
   const imageMap = {
     CHIPMUNK: "/images/CHIPMUNK_HERO.png",
-    "SNOW DROP": "/images/FLOWER_HERO_WITH_SNOW.png",
+    "SNOW DROP": "/images/FLOWER_HERO_UPDATED.png",
     CLOUDS: "/images/CLOUD.png",
-    HUMMINGBIRD: "/images/HUMMINGBIRD_HERO.png",
+    HUMMINGBIRD: "/images/HUMMINGBIRD_HERO_TEST2.png",
     RACOON: "/images/RACCOON_HERO.png",
   };
 
@@ -62,6 +62,7 @@ function Question_page({
       //contain= dont need to specify height and width seperate
       height: "22vw",
       width: "22vw",
+      marginBottom: "10%",
     },
 
     "SNOW DROP": {
@@ -71,6 +72,7 @@ function Question_page({
       //contain= dont need to specify height and width seperate
       height: "22vw",
       width: "22vw",
+      marginBottom: "7%",
     },
 
     RACOON: {
@@ -80,6 +82,7 @@ function Question_page({
       //contain= dont need to specify height and width seperate
       height: "22vw",
       width: "22vw",
+      marginBottom: "10%",
     },
     CHIPMUNK: {
       backgroundSize: "contain",
@@ -88,6 +91,7 @@ function Question_page({
       //contain= dont need to specify height and width seperate
       height: "22vw",
       width: "22vw",
+      marginBottom: "14%",
     },
   };
 
@@ -103,17 +107,7 @@ function Question_page({
 
   return (
     <>
-      <div
-        ref={nodeRefTwo}
-        style={{
-          ...flexStyles,
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+      <div ref={nodeRefTwo} className="select_answer_container">
         <p style={{ ...questionTwoStyle }}>
           {questionList[selectedValue]?.question}
         </p>
@@ -146,26 +140,6 @@ function Question_page({
               <button
                 key={answer}
                 style={{
-                  //maxWidth: "100%",
-                  //maxWidth: "470px",
-                  // minWidth: "430px",
-                  //minWidth: "80%",
-                  /* whiteSpace: "normal",
-                  wordWrap: "break-word",
-                  textAlign: "center",*/
-
-                  /* ...(clickedButton === answer
-                    ? {
-                        maxWidth: "500px",
-                        minWidth: "400px",
-                        transform: "scale(1.2)",
-                        opacity: 0.85,
-                        transition: "transform 0.5s ease-in-out",
-                        backgroundColor: "#9AF7B4",
-                        color: "#1B392F",
-                      }
-                    : {}),*/
-
                   ...(clickedButton === answer ? buttonClick : buttonStyle),
                 }}
                 onClick={() => clickButton(answer)}
@@ -185,14 +159,14 @@ function Question_page({
           </div>
           <div
             style={{
-              backgroundImage: "url(/images/CAR_HERO.png)",
+              backgroundImage:
+                "url(/images/CAR_HERO_UPDATED_SHADOW_RESIZE3.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              height: "210px",
-              width: "420px",
-              marginTop: "60px",
-              marginLeft: "50px",
-              //  marginLeft: "70px",
+              height: "300px",
+              width: "500px",
+
+              marginRight: "7%",
             }}
           ></div>
         </div>
