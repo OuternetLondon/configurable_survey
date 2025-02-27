@@ -11,7 +11,6 @@ function Select_metaphor({
   nodeRefOne,
 }) {
   const questionList = JSON_data.questionList;
-  // let questionOneStyle = JSON_data.questionOne;
 
   function clickButton(answer) {
     setClickedButton(answer);
@@ -19,12 +18,9 @@ function Select_metaphor({
       setCurrentQuestion("transition");
       setTimeout(() => {
         setSelectedValue(answer);
-        //  setClickedButton("");
         setCurrentQuestion("questionTwo");
       }, 351);
     }, 200);
-
-    //  console.log(answer);
   }
 
   function submit() {

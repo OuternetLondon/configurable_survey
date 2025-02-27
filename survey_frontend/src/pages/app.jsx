@@ -34,111 +34,6 @@ function App() {
     "skoda-dark": "#1B392F",
   };
   const JSON_data = {
-    mainContainer: {
-      height: "100vh",
-      width: "100vw",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      image: "/images/BACKGROUND_SKODA_3.png",
-    },
-    questionOne: {
-      fontSize: "60px",
-      color: "white",
-      fontFamily: "skoda_bold, sans-serif",
-      textAlign: "center",
-      width: "100%",
-      marginBottom: "120px",
-    },
-    questionTwo: {
-      fontSize: "40px",
-      color: "white",
-      fontFamily: "skoda_bold, sans-serif",
-      textAlign: "center",
-    },
-    questionThree: {
-      color: "white",
-      fontFamily: "skoda_bold, sans-serif",
-      textAlign: "center",
-    },
-    q1_buttonGroup: {
-      padding_x_axis: "50px",
-      contentStructure: "space-evenly",
-      width: "100%",
-      gap: "50px",
-      direction: "horizontal",
-      display: "flex",
-    },
-    q2_buttonGroup: {
-      display: "flex",
-      gap: "30px",
-      flexDirection: "column",
-    },
-    q1_button: {
-      height: "200px",
-      width: "200px",
-      selectedStyle: {
-        backgroundColor: "skoda-light-500",
-        outlineColor: "blue-500",
-        outlineStyle: "solid",
-        outlineWidth: "7px",
-        size: "xl",
-        height: "200px",
-        width: "200px",
-        borderRadius: "30px",
-      },
-      text: {
-        fontSize: "3xl",
-        fontStyle: "skoda_bold, sans-serif",
-      },
-    },
-    q2_button: {
-      borderColor: added_colors["skoda-light"],
-      borderStyle: "solid",
-      padding: "10px 40px",
-      maxWidth: "500px",
-      minWidth: "375px",
-      borderRadius: "100px",
-      borderWidth: "3px",
-      color: "white",
-      background: "transparent",
-      backdropFilter: "blur(20px)",
-      lineHeight: "1.15",
-      selectedStyle: {
-        transform: "scale(1.2)",
-        opacity: 0.85,
-        transition: "transform 0.3s ease-out",
-        backgroundColor: "#9AF7B4",
-        color: added_colors["skoda-dark"],
-        borderColor: added_colors["skoda-dark"],
-        borderStyle: "solid",
-        lineHeight: "1.15",
-        padding: "10px 40px",
-        maxWidth: "600px",
-        minWidth: "350px",
-        borderRadius: "100px",
-        borderWidth: "3px",
-        fontSize: "40px",
-      },
-      text: {
-        fontSize: "40px",
-        fontFamily: "skoda_bold, sans-serif",
-        padding: "0px",
-        margin: "0px",
-      },
-    },
-    confirmButton: {
-      borderColor: "white",
-      width: "15%",
-      padding_y_axis: 30,
-      borderRadius: "100px",
-      backgroundColor: "skoda-light-500",
-      text: {
-        fontStyle: "skoda_bold, sans-serif",
-        fontSize: "2xl",
-        color: "black",
-      },
-    },
     questionList: {
       questionOne: {
         question: "Select to play",
@@ -215,28 +110,8 @@ function App() {
 
   return (
     <>
-      <div
-        style={{
-          backgroundImage: `url(/images/BACKGROUND_SKODA_3.png)`,
-          height: "100vh",
-          width: "100vw",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            bottom: "2%",
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-            width: "100%",
-          }}
-        >
+      <div className="main_container">
+        <div className="logo_wrapper">
           <Logo
             color={added_colors["skoda-light"]}
             styles={{ marginTop: "20px", marginLeft: "20px" }}

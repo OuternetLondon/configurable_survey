@@ -178,6 +178,26 @@ body {
   transition: opacity 350ms ease-out;
 }
 
+.main_container {
+  background-image: url("/images/BACKGROUND_SKODA_3.png");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo_wrapper {
+  position: absolute;
+  bottom: 2%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
 .metaphor_container {
   position: relative;
   width: 100%;
@@ -213,4 +233,107 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.select_answer_question {
+  font-size: 40px;
+  color: white;
+  font-family: "skoda_bold", sans-serif;
+  text-align: center;
+}
+
+.select_answer_center {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+.button_group {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.select_answer_button_text {
+  font-size: 40px;
+  font-family: "skoda_bold", sans-serif;
+  padding: 0;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.select_answer_car_img {
+  background-image: url(/images/CAR_HERO_UPDATED_SHADOW_RESIZE3.png);
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 500px;
+  margin-right: 7%;
+}
+
+.select_answer_invisible {
+  font-size: 40px;
+  color: white;
+  font-family: "skoda_bold", sans-serif;
+  text-align: center;
+  visibility: hidden;
+}
+
+:root {
+  --skoda_light: #9af7b4;
+  --skoda_dark: #1b392f;
+}
+
+.select_answer_button {
+  border-color: var(--skoda_light);
+  border-style: solid;
+  padding: 10px 40px;
+  max-width: 500px;
+  min-width: 375px;
+  border-radius: 100px;
+  border-width: 3px;
+  color: white;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  line-height: 1.15;
+}
+
+.select_answer_button_click {
+  transform: scale(1.2);
+  opacity: 0.85;
+  transition: transform 0.3s ease-out;
+  background-color: #9af7b4;
+  color: var(--skoda_dark);
+  border-color: var(--skoda_dark);
+  border-style: solid;
+  line-height: 1.15;
+  padding: 10px 40px;
+  max-width: 600px;
+  min-width: 350px;
+  border-radius: 100px;
+  border-width: 3px;
+  font-size: 40px;
+}
+
+.select_answer_img {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 22vw;
+  width: 22vw;
+}
+
+.final_text {
+  color: white;
+  font-family: "skoda_bold", sans-serif;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14vw;
+  white-space: nowrap;
 }

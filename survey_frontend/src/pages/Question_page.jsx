@@ -20,12 +20,6 @@ function Question_page({
   nodeRefTwo,
 }) {
   const questionList = JSON_data.questionList;
-  let flexStyles = JSON_data.mainContainer;
-  let questionTwoStyle = JSON_data.questionTwo;
-  let buttonGroupStyle = JSON_data.q2_buttonGroup;
-  let buttonStyle = JSON_data.q2_button;
-  let buttonClick = JSON_data.q2_button.selectedStyle;
-  let buttonTextStyle = JSON_data.q2_button.text;
 
   function clickButton(answer) {
     setClickedButton(answer);
@@ -47,131 +41,57 @@ function Question_page({
   };
 
   const imageStyles = {
-    CLOUDS: {
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "22vw",
-      width: "22vw",
-    },
+    CLOUDS: {},
     HUMMINGBIRD: {
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "22vw",
-      width: "22vw",
       marginBottom: "10%",
     },
 
     "SNOW DROP": {
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "22vw",
-      width: "22vw",
       marginBottom: "7%",
     },
 
     RACOON: {
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "22vw",
-      width: "22vw",
-      marginBottom: "10%",
+      marginBottom: "12%",
     },
     CHIPMUNK: {
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      //contain= dont need to specify height and width seperate
-      height: "22vw",
-      width: "22vw",
       marginBottom: "14%",
+      marginLeft: "8%",
     },
   };
-
-  /*let largeStyle = {};
-  questionList[selectedValue].answers.forEach((answer) => {
-    if (answer.length >= 18) {
-      largeStyle = {
-        //    padding: "12px 40px",
-        lineHeight: "1.2",
-      };
-    }
-  });*/
 
   return (
     <>
       <div ref={nodeRefTwo} className="select_answer_container">
-        <p style={{ ...questionTwoStyle }}>
+        <p className="select_answer_question">
           {questionList[selectedValue]?.question}
         </p>
-        <div
-          /*  style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            width: "100%",
-          }}*/
-          style={{
-            display: "grid",
-            //gridTemplateColumns: "1fr 1fr 1fr",
-            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-
-            gridTemplateRows: "1fr ",
-            width: "100%",
-            justifyItems: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className="select_answer_center">
           <div
+            className="select_answer_img"
             style={{
               backgroundImage: `url(${imageMap[selectedValue]})`,
               ...imageStyles[selectedValue],
             }}
           ></div>
-          <div style={{ ...buttonGroupStyle }}>
+          <div className="button_group">
             {questionList[selectedValue]?.answers?.map((answer) => (
               <button
                 key={answer}
-                style={{
-                  ...(clickedButton === answer ? buttonClick : buttonStyle),
-                }}
+                className={
+                  clickedButton === answer
+                    ? "select_answer_button_click"
+                    : "select_answer_button"
+                }
                 onClick={() => clickButton(answer)}
               >
-                <p
-                  style={{
-                    ...buttonTextStyle,
-                    whiteSpace: "normal",
-                    wordWrap: "break-word",
-                    textAlign: "center",
-                  }}
-                >
-                  {answer}
-                </p>
+                <p className="select_answer_button_text">{answer}</p>
               </button>
             ))}
           </div>
-          <div
-            style={{
-              backgroundImage:
-                "url(/images/CAR_HERO_UPDATED_SHADOW_RESIZE3.png)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "300px",
-              width: "500px",
-
-              marginRight: "7%",
-            }}
-          ></div>
+          <div className="select_answer_car_img"></div>
         </div>
 
-        <p style={{ ...questionTwoStyle, visibility: "hidden" }}>
+        <p className="select_answer_invisible">
           {questionList[selectedValue]?.question}
         </p>
       </div>
